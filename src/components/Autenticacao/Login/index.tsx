@@ -14,6 +14,6 @@ export default function Login({onClick}: LoginProps) {
     }
 
     return(
-        <FormPadrao onClick={onClick} onSubmit={handleSubmit} authUser={"Sign in"} buttonText={"Sign up"} textAuth={"Already have an account?"} title={"Create your account"} />
+        <FormPadrao onClick={onClick} onSubmit={handleSubmit} authUser={"Sign in"} buttonText={"Sign up"} textAuth={"Already have an account?"} title={"Welcome Back"} />
     )
 }

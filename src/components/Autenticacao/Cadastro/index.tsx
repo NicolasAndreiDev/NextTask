@@ -14,6 +14,6 @@ export default function Cadastro({onClick}: CadastroProps) {
     }
 
     return(
-        <FormPadrao onClick={onClick} onSubmit={handleSubmit} authUser={"Sign up"} buttonText={"Sign in"} textAuth={"Don't have account?"} title={"Welcome Back"} />
+        <FormPadrao onClick={onClick} onSubmit={handleSubmit} inputExist={true} authUser={"Sign up"} buttonText={"Sign in"} textAuth={"Don't have account?"} title={"Create Your Account"} />
     )
 }

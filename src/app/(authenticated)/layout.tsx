@@ -10,11 +10,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={styles.layout}>
-        <Header />
-        <div className={styles.infoBody}>
-            <AsideBar />
-            {children}
-        </div>
+          <Header />
+          <div className={styles.infoBody}>
+              <AsideBar />
+              {children}
+          </div>
       </body>
     </html>
   )

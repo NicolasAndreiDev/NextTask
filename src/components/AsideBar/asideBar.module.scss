@@ -1,5 +1,18 @@
+@import '@/styles/variaveis.scss';
+
 .aside{
-    height: 92.8vh;
-    width: 7.2vh;
-    background-color: cornflowerblue;
+    height: 93.4vh;
+    width: 6.4rem;
+    animation: project 2s infinite;
+    display: flex;
+    background-color: rgba(255,255,255, 0.6);
+}
+
+@keyframes project {
+    from{
+        width: 100%;
+    }
+    to{
+        width: 6.4rem;
+    }
 }
