@@ -1,0 +1,104 @@
+@import '@/styles/variaveis.scss';
+
+.topProject{
+    display: flex;
+    position: sticky;
+    top: 0;
+    left: 0;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+    .esquerda{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        .layoutType{
+            width: 8rem;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border-radius: .4rem;
+            background-color: $cinza-claro;
+            cursor: pointer;
+            .template{
+                color: $cor-principal;
+                height: 2.4rem;
+                width: 2.4rem;
+            }
+            .arrow{
+                color: $cor-principal;
+                height: 1.4rem;
+                width: 1.4rem;
+            }
+        }
+        .projectName{
+            font-size: 2.8rem;
+            margin: 0;
+            color: $cor-principal;
+        }
+        .linha{
+            height: 4rem;
+            width: .1rem;
+            background-color: $cinza-claro;
+            margin: 0 2rem;
+        }
+        .participantes{
+            display: flex;
+            .imagemDefault{
+                height: 3.2rem;
+                width: 3.2rem;
+                position: relative;
+                border-radius: 100%;
+                &:nth-child(n + 1) {
+                    background-color: bisque;
+                }
+                &:nth-child(n + 2){
+                    left: -.4rem;
+                    z-index: -1;
+                    background-color: rgb(180, 32, 32);
+                }
+                &:nth-child(n + 3){
+                    left: -.8rem;
+                    z-index: -2;
+                    background-color: rgb(41, 188, 247);
+                }
+            }
+            .countUsers{
+                height: 3.2rem;
+                min-width: 3.2rem;
+                display: grid;
+                place-items: center;
+                border-radius: 1.6rem;
+                background-color: $cinza-claro;
+                .count{
+                    font-size: 2rem;
+                    margin: 0 .8rem;
+                    color: $cor-principal;
+                }
+            }
+        }
+        .inviteButton{
+            width: 8rem;
+            border: none;
+            border-radius: .4rem;
+            padding: 1rem 2rem;
+            color: $cor-principal;
+            background-color: $cinza-claro;
+            cursor: pointer;
+        }
+    }
+    .options{
+        background-color: $cinza-claro;
+        width: 16rem;
+        display: flex;
+        color: $cor-principal;
+        align-items: center;
+        padding: 0 1rem;
+        border-radius: .4rem;
+        cursor: pointer;
+        .icon{
+            height: 2.8rem;
+            width: 2.8rem;
+        }
+    }
+}
