@@ -1,7 +1,8 @@
+import PopUp from "@/components/PopUp";
+
 export default function UserPopUp() {
     return(
-        <div>
-            
-        </div>
+        <PopUp>
+        </PopUp>
     )
 }

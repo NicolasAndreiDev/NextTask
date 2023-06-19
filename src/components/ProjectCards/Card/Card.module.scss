@@ -1,6 +1,6 @@
 @import '@/styles/variaveis.scss';
 
-.card{
+.card {
     display: grid;
     gap: 1rem;
     min-width: 32rem;
@@ -9,26 +9,31 @@
     padding: .4rem;
     background-color: $cor-principal;
     border-radius: .8rem;
-    .infoCard{
+
+    .infoCard {
         display: flex;
         padding: .4rem 1rem;
         justify-content: space-between;
         align-items: center;
-        .titleCard{
+
+        .titleCard {
             font-size: 2.4rem;
             margin: 0;
         }
-        .options{
+
+        .options {
             height: 2.8rem;
             width: 2.8rem;
             border-radius: .4rem;
             cursor: pointer;
-            &:hover{
+
+            &:hover {
                 background-color: $cinza-claro;
             }
         }
     }
-    .tasks{
+
+    .tasks {
         display: grid;
         gap: 1rem;
         padding: .4rem;
@@ -37,7 +42,8 @@
         overflow: auto;
         box-sizing: border-box;
     }
-    .adicionarTask{
+
+    .adicionarTask {
         padding: 1rem;
         display: flex;
         align-items: center;
@@ -49,13 +55,42 @@
         border-radius: .4rem;
         cursor: pointer;
         gap: .4rem;
-        &:hover{
+
+        &:hover {
             background-color: rgba(142, 78, 245, 0.9);
         }
-        .icon{
+
+        .icon {
             height: 2rem;
             width: 2rem;
             color: $cor-principal;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        .adicionarTarefaTrue {
+            margin: 0 .4rem;
+            border: none;
+            border-radius: .4rem;
+            color: $cor-principal;
+            text-align: start;
+            padding: 1rem;
+            height: 4rem;
+            cursor: pointer;
+            background-color: $cor-secundaria;
+        }
+        .closeIcon {
+            height: 2.4rem;
+            width: 2.4rem;
+            padding: .8rem;
+            border-radius: .4rem;
+            cursor: pointer;
+            &:hover{
+                background-color: $cinza-claro;
+
+            }
         }
     }
 }

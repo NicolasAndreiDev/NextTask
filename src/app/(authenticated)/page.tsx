@@ -1,7 +1,7 @@
-import ProjectCards from "@/components/ProjectCards"
+import InfoHome from "@/components/InfoHome"
 
 export default function Home() {
   return (
-    <><ProjectCards /></>
+    <InfoHome />
   )
 }

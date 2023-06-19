@@ -1,6 +1,7 @@
 import styles from './ProjectCard.module.scss';
 import Card from "./Card";
 import OptionsProject from './OptionsProject';
+import AdicionarNovaLista from './AdicionarNovaLista';
 
 export default function ProjectCards() {
     return (
@@ -13,6 +14,7 @@ export default function ProjectCards() {
                 <Card numTasks={10} />
                 <Card numTasks={3} />
                 <Card numTasks={10} />
+                <AdicionarNovaLista />
             </div>
         </div>
     )

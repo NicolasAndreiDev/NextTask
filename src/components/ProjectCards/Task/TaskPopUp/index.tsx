@@ -1,7 +1,8 @@
+import PopUp from "@/components/PopUp";
+
 export default function TaskPopUp() {
     return(
-        <div>
-            
-        </div>
+        <PopUp>
+        </PopUp>
     )
 }

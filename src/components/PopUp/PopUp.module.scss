@@ -1,0 +1,14 @@
+@import '@/styles/variaveis.scss';
+
+.popUp{
+    height: 30rem;
+    width: 30rem;
+    background-color: $cor-principal;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}

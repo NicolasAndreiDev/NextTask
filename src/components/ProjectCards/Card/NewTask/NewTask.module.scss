@@ -1,0 +1,15 @@
+@import '@/styles/variaveis.scss';
+
+.box {
+    border: .1rem solid $cor-secundaria;
+    outline: none;
+    resize: none;
+    font-size: 1.6rem;
+    display: flex;
+    margin: 0 .4rem;
+    padding: 1rem;
+    border-radius: .4rem;
+    background-color: $cinza-claro;
+    overflow: hidden;
+    font-family: 'Playfair', serif;
+}

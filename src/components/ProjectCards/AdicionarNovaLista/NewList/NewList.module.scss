@@ -1,0 +1,51 @@
+@import '@/styles/variaveis.scss';
+
+.newList{
+    height: min-content;
+    width: 32rem;
+    border-radius: .4rem;
+    background-color: $cor-principal;
+    position: absolute;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    padding: .4rem;
+    top: 0;
+    .box{
+        border: .1rem solid $cor-secundaria;
+        outline: none;
+        resize: none;
+        font-size: 1.6rem;
+        display: flex;
+        margin: .4rem;
+        padding: 1rem;
+        border-radius: .4rem;
+        background-color: $cinza-claro;
+        overflow: hidden;
+        font-family: 'Playfair', serif;
+    }
+    .icon{
+        height: 2.4rem;
+        width: 2.4rem;
+        padding: 0.8rem;
+        border-radius: .4rem;
+        cursor: pointer;
+        &:hover{
+            background-color: $cinza-claro;
+        }
+    }
+    .createList{
+        display: flex;
+        align-items: center;
+        .buttonAdd{
+            height: 4rem;
+            padding: 0 1rem;
+            border-radius: .4rem;
+            border: none;
+            margin: 0.4rem;
+            cursor: pointer;
+            background-color: $cor-secundaria;
+            color: $cor-principal;
+        }
+    }
+}

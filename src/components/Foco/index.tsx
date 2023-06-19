@@ -1,7 +1,7 @@
-export default function Foco() {
+import styles from './Foco.module.scss';
+
+export default function Foco({color}: {color: string}) {
     return(
-        <div>
-            
-        </div>
+        <div className={styles.foco} style={{backgroundColor: color}}></div>
     )
 }
