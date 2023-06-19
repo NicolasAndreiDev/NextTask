@@ -1,6 +1,17 @@
+@import '@/styles/variaveis.scss';
+
 .task{
-    height: 12rem;
+    height: 4rem;
     border-radius: .4rem;
     width: 100%;
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(230, 230, 230);
+    padding: 1rem ;
+    box-sizing: border-box;
+    cursor: pointer;
+    &:hover{
+        background-color: $cinza-claro;
+    }
+    .titleTask{
+        font-size: 1.6rem;
+    }
 }

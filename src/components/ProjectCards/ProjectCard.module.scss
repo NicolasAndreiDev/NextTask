@@ -1,5 +1,8 @@
-.projectCards{
-    padding: 2rem;
-    display: flex;
-    gap: 2rem;
+.project{
+    overflow: auto;
+    margin: 2rem;
+    .projectCards{
+        display: flex;
+        gap: 2rem;
+    }
 }

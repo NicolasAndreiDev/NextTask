@@ -1,7 +1,61 @@
+@import '@/styles/variaveis.scss';
+
 .card{
-    height: 40rem;
-    width: 32rem;
-    padding: 2rem;
-    background-color: #ffffff;
+    display: grid;
+    gap: 1rem;
+    min-width: 32rem;
+    height: min-content;
+    gap: 1rem;
+    padding: .4rem;
+    background-color: $cor-principal;
     border-radius: .8rem;
+    .infoCard{
+        display: flex;
+        padding: .4rem 1rem;
+        justify-content: space-between;
+        align-items: center;
+        .titleCard{
+            font-size: 2.4rem;
+            margin: 0;
+        }
+        .options{
+            height: 2.8rem;
+            width: 2.8rem;
+            border-radius: .4rem;
+            cursor: pointer;
+            &:hover{
+                background-color: $cinza-claro;
+            }
+        }
+    }
+    .tasks{
+        display: grid;
+        gap: 1rem;
+        padding: .4rem;
+        position: relative;
+        max-height: 64rem;
+        overflow: auto;
+        box-sizing: border-box;
+    }
+    .adicionarTask{
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        text-align: start;
+        border: none;
+        margin: .4rem;
+        background-color: $cor-secundaria;
+        color: $cor-principal;
+        border-radius: .4rem;
+        cursor: pointer;
+        gap: .4rem;
+        &:hover{
+            background-color: rgba(142, 78, 245, 0.9);
+        }
+        .icon{
+            height: 2rem;
+            width: 2rem;
+            color: $cor-principal;
+        }
+    }
 }

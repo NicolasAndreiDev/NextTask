@@ -1,6 +1,9 @@
+@import '@/styles/variaveis.scss';
+
 .imagemDefault{
     height: 4rem;
     width: 4rem;
     border-radius: 100%;
-    background-color: rgb(180, 180, 180);
+    background-color: $cinza-claro;
+    cursor: pointer;
 }

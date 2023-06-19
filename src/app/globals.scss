@@ -1,0 +1,29 @@
+@import '@/styles/variaveis.scss';
+@import url('https://fonts.googleapis.com/css2?family=Playfair:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html {
+  font-size: 62.5%;
+  font-family: 'Playfair', serif;
+  color: #2d333a;
+  box-sizing: border-box;
+
+  ::-webkit-scrollbar {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: .4rem;
+    background-color: rgb(175, 175, 175)
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: .4rem;
+    background-color: rgba(175, 175, 175, 0.2);
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+}
