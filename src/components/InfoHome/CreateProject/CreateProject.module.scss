@@ -1,0 +1,12 @@
+@import '@/styles/variaveis.scss';
+
+.newProject{
+    height: 12rem;
+    display: grid;
+    place-items: center;
+    font-size: 1.6rem;
+    min-width: 24rem;
+    background-color: $cinza-claro;
+    border-radius: .4rem;
+    cursor: pointer;
+}

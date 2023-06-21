@@ -3,6 +3,12 @@ import styles from './autenticacao.module.scss'
 import { FcGoogle } from 'react-icons/fc'
 import { useState } from 'react';
 
+interface FormEvent {
+    email: string,
+    password: string,
+    confirmPassword?: string
+}
+
 interface AutenticacaoProps {
     title: string;
     buttonText: string;
@@ -11,22 +17,18 @@ interface AutenticacaoProps {
     inputExist?: boolean;
     onClick: () => void;
     onSubmit: (event: React.FormEvent) => void;
-}
-
-interface FormEvent {
-    email: string,
-    password: string,
-    confirmPassword?: string
+    setValuesUser: (values: FormEvent) => void;
 }
 
 export default function FormPadrao({
     title,
     inputExist = false,
     onClick,
+    onSubmit,
+    setValuesUser,
     authUser,
     buttonText,
     textAuth,
-    onSubmit
 }: AutenticacaoProps) {
     const [fieldStyles, setFieldStyles] = useState<{ [key: string]: boolean }>({
         email: false,
@@ -54,7 +56,8 @@ export default function FormPadrao({
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
-        setValues((prevValues) => ({ ...prevValues, [name]: value }))
+        setValues((prevValues) => ({ ...prevValues, [name]: value }));
+        setValuesUser(values);
     }
 
     return (

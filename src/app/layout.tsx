@@ -1,4 +1,7 @@
+'use client';
 import { Metadata } from 'next';
+import { ApolloProvider } from '@apollo/client';
+import { client } from '@/backendConnection';
 import './globals.scss';
 
 export const metadata: Metadata = {
@@ -16,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <ApolloProvider client={client}>
+          {children}
+        </ApolloProvider>
       </body>
     </html>
   )

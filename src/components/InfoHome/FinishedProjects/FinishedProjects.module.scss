@@ -1,0 +1,13 @@
+@import '@/styles/variaveis.scss';
+
+.buttonFinish{
+    padding: 1.2rem;
+    background-color: $cor-secundaria;
+    color: $cor-principal;
+    border: none;
+    border-radius: .4rem;
+    cursor: pointer;
+    &:hover{
+        background-color: rgba(142, 78, 245, 0.9);
+    }
+}
