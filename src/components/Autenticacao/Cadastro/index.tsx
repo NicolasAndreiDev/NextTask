@@ -1,9 +1,10 @@
 import { useRouter } from "next/navigation";
 import FormPadrao from "../FormPadrao";
 import { useState } from "react";
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { CREATE_USER } from "@/graphql/CreateUser";
-import { GET_USERS } from "@/graphql/GetUser";
+import bcrypt from 'bcryptjs';
+
 
 interface FormEvent {
   email: string,
@@ -19,18 +20,21 @@ export default function Cadastro({ onClick }: CadastroProps) {
   const route = useRouter();
   const [values, setValues] = useState<FormEvent>({ email: "", password: "" });
   const [createUser, { loading, error }] = useMutation(CREATE_USER);
-  const { loading: getUsersLoading, error: getUsersError, data: usersData } = useQuery(GET_USERS);
 
-  function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    console.log("Usuários:", usersData?.users);
+    if(values.password != values.confirmPassword) {
+      return
+    }
+
+    const hashedPassword = await bcrypt.hash(values.password, 10)
 
     createUser({
       variables: {
         user: {
-            email: values.email,
-            password: values.password
+          email: values.email,
+          password: hashedPassword,
         }
       }
     }).then(() => {

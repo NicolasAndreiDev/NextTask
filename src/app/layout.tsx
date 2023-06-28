@@ -1,7 +1,7 @@
 'use client';
 import { Metadata } from 'next';
 import { ApolloProvider } from '@apollo/client';
-import { client } from '@/backendConnection';
+import { client } from '@/connection';
 import './globals.scss';
 
 export const metadata: Metadata = {

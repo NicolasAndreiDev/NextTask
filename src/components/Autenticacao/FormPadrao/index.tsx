@@ -57,7 +57,7 @@ export default function FormPadrao({
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
         setValues((prevValues) => ({ ...prevValues, [name]: value }));
-        setValuesUser(values);
+        setValuesUser({ ...values, [name]: value });
     }
 
     return (
