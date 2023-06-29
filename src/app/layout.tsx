@@ -2,6 +2,7 @@
 import { Metadata } from 'next';
 import { ApolloProvider } from '@apollo/client';
 import { client } from '@/connection';
+import { SessionProvider } from 'next-auth/react';
 import './globals.scss';
 
 export const metadata: Metadata = {
@@ -12,16 +13,18 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode
 }) {
   return (
     <html lang="en">
       <body>
-        <ApolloProvider client={client}>
-          {children}
-        </ApolloProvider>
+        <SessionProvider>
+          <ApolloProvider client={client}>
+            {children}
+          </ApolloProvider>
+        </SessionProvider>
       </body>
     </html>
   )

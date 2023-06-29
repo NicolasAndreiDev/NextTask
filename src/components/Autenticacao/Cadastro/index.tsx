@@ -1,59 +1,61 @@
-import { useRouter } from "next/navigation";
 import FormPadrao from "../FormPadrao";
 import { useState } from "react";
-import { useMutation } from '@apollo/client';
-import { CREATE_USER } from "@/graphql/CreateUser";
-import bcrypt from 'bcryptjs';
-
+import { USER_EXIST } from "@/graphql/UserExist";
+import { useMutation } from "@apollo/client";
+import { signIn } from 'next-auth/react';
 
 interface FormEvent {
-  email: string,
-  password: string,
-  confirmPassword?: string
+	email: string,
+	password: string,
+	confirmPassword?: string
 }
 
-interface CadastroProps {
-  onClick: () => void;
+interface LoginProps {
+	onClick: () => void;
 }
 
-export default function Cadastro({ onClick }: CadastroProps) {
-  const route = useRouter();
-  const [values, setValues] = useState<FormEvent>({ email: "", password: "" });
-  const [createUser, { loading, error }] = useMutation(CREATE_USER);
+interface ErrMessageProps {
+	err: boolean;
+	textErr: string;
+}
 
-  async function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
+export default function Cadastro({ onClick }: LoginProps) {
+	const [values, setValues] = useState<FormEvent>({ email: "", password: "", confirmPassword: "" });
+	const [userLogin, { loading, error }] = useMutation(USER_EXIST);
+	const [errMessage, setErrMessage] = useState<ErrMessageProps>({
+		err: false,
+		textErr: ""
+	});
 
-    if(values.password != values.confirmPassword) {
-      return
-    }
+	async function handleSubmit(event: React.FormEvent) {
+		event.preventDefault();
 
-    const hashedPassword = await bcrypt.hash(values.password, 10)
+		userLogin({
+			variables: {
+				user: {
+					email: values.email,
+					password: values.password,
+				}
+			}
+		}).then(() => {
+			signIn('email', {
+				callbackUrl: '/',
+			});
+		}).catch((error) => {
+			console.error(error);
+		});
+	}
 
-    createUser({
-      variables: {
-        user: {
-          email: values.email,
-          password: hashedPassword,
-        }
-      }
-    }).then(() => {
-      route.push('/');
-    }).catch((error) => {
-      console.error(error);
-    });
-  }
-
-  return (
-    <FormPadrao
-      setValuesUser={setValues}
-      onClick={onClick}
-      onSubmit={handleSubmit}
-      inputExist={true}
-      authUser={"Sign up"}
-      buttonText={"Sign in"}
-      textAuth={"Don't have account?"}
-      title={"Create Your Account"}
-    />
-  )
+	return (
+		<FormPadrao
+			textErr={errMessage.textErr}
+			errExist={errMessage.err}
+			setValuesUser={setValues}
+			onClick={onClick}
+			onSubmit={handleSubmit}
+			authUser={"Sign in"}
+			buttonText={"Sign up"}
+			textAuth={"Already have an account?"}
+			title={"Welcome Back"} />
+	)
 }
