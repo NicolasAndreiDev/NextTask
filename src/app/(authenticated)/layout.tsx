@@ -8,16 +8,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { data: session } = useSession({
-    required: true
-  })
+  // const { data: session } = useSession({
+  //   required: true
+  // })
 
   return (
     <>
-      {session ? <div className={styles.layout}>
+      <div className={styles.layout}>
         <Header />
         {children}
-      </div> : ""}
+      </div>
     </>
   )
 }

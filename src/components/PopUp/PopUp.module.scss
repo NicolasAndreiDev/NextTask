@@ -1,10 +1,12 @@
 @import '@/styles/variaveis.scss';
 
 .popUp{
-    height: 30rem;
+    height: min-content;
+    min-height: 30rem;
     width: 30rem;
     background-color: $cor-principal;
     position: fixed;
+    padding: 2rem;
     z-index: 2;
     top: 0;
     bottom: 0;

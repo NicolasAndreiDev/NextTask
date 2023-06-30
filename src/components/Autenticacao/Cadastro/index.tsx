@@ -1,61 +1,86 @@
 import FormPadrao from "../FormPadrao";
 import { useState } from "react";
-import { USER_EXIST } from "@/graphql/UserExist";
-import { useMutation } from "@apollo/client";
+import { useMutation } from '@apollo/client';
+import { CREATE_USER } from "@/graphql/CreateUser";
+import bcrypt from 'bcryptjs';
 import { signIn } from 'next-auth/react';
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 interface FormEvent {
-	email: string,
-	password: string,
-	confirmPassword?: string
+  email: string,
+  password: string,
+  confirmPassword?: string
 }
 
-interface LoginProps {
-	onClick: () => void;
+interface CadastroProps {
+  onClick: () => void;
 }
 
 interface ErrMessageProps {
-	err: boolean;
-	textErr: string;
+  err: boolean;
+  textErr: string;
 }
 
-export default function Cadastro({ onClick }: LoginProps) {
-	const [values, setValues] = useState<FormEvent>({ email: "", password: "", confirmPassword: "" });
-	const [userLogin, { loading, error }] = useMutation(USER_EXIST);
-	const [errMessage, setErrMessage] = useState<ErrMessageProps>({
-		err: false,
-		textErr: ""
-	});
+export default function Cadastro({ onClick }: CadastroProps) {
+  const [values, setValues] = useState<FormEvent>({ email: "", password: "" });
+  const [createUser, { loading, error }] = useMutation(CREATE_USER);
+  const [errMessage, setErrMessage] = useState<ErrMessageProps>({
+    err: false,
+    textErr: "",
+  });
 
-	async function handleSubmit(event: React.FormEvent) {
-		event.preventDefault();
+  async function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
 
-		userLogin({
-			variables: {
-				user: {
-					email: values.email,
-					password: values.password,
-				}
-			}
-		}).then(() => {
-			signIn('email', {
-				callbackUrl: '/',
-			});
-		}).catch((error) => {
-			console.error(error);
-		});
-	}
+    if (!emailRegex.test(values.email)) {
+      return setErrMessage({err: true, textErr: 'Email inválido!'})
+    }
 
-	return (
-		<FormPadrao
-			textErr={errMessage.textErr}
-			errExist={errMessage.err}
-			setValuesUser={setValues}
-			onClick={onClick}
-			onSubmit={handleSubmit}
-			authUser={"Sign in"}
-			buttonText={"Sign up"}
-			textAuth={"Already have an account?"}
-			title={"Welcome Back"} />
-	)
+    if (values.email == "" || values.password == "" || values.confirmPassword == "") {
+      return setErrMessage({err: true, textErr: 'Preencha todos os campos!'})
+    }
+
+    if (values.password.length <= 5) {
+      return setErrMessage({err: true, textErr: 'A senha precisa ter pelo menos 6 caracteres!'})
+    }
+
+    if (values.password != values.confirmPassword) {
+      return setErrMessage({err: true, textErr: 'As senhas digitadas não coincidem!'})
+    }
+
+    const hashedPassword = await bcrypt.hash(values.password, 10)
+
+    createUser({
+      variables: {
+        user: {
+          email: values.email,
+          password: hashedPassword,
+        }
+      }
+    }).then(() => {
+      signIn('credentials', {
+        email: values.email,
+        password: values.password,
+        callbackUrl: '/',
+      })
+    }).catch((error) => {
+      setErrMessage({err: true, textErr: error.message});
+    });
+  }
+
+  return (
+    <FormPadrao
+      textErr={errMessage.textErr}
+      errExist={errMessage.err}
+      setValuesUser={(values) => {setValues(values), setErrMessage({err: false, textErr: ""})}}
+      onClick={onClick}
+      onSubmit={handleSubmit}
+      inputExist={true}
+      authUser={"Sign up"}
+      buttonText={"Sign in"}
+      textAuth={"Don't have account?"}
+      title={"Create Your Account"}
+    />
+  )
 }
