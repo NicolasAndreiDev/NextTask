@@ -1,5 +1,4 @@
 import ProjectCards from "@/components/ProjectCards"
-import AdicionarNovaLista from "@/components/ProjectCards/AdicionarNovaLista"
 
 interface ProjectProps {
     params: {
