@@ -67,6 +67,7 @@ export default function Login({ onClick }: LoginProps) {
 			authUser={"Sign in"}
 			buttonText={"Sign up"}
 			textAuth={"Already have an account?"}
-			title={"Welcome Back"} />
+			title={"Welcome Back"} 
+			/>
 	)
 }

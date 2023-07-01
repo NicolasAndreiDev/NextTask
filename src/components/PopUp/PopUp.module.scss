@@ -3,11 +3,12 @@
 .popUp{
     height: min-content;
     min-height: 30rem;
+    border-radius: .4rem;
     width: 30rem;
     background-color: $cor-principal;
     position: fixed;
     padding: 2rem;
-    z-index: 2;
+    z-index: 4;
     top: 0;
     bottom: 0;
     left: 0;

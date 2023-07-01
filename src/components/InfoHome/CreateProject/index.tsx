@@ -21,7 +21,7 @@ export default function CreateProject() {
     }, [PopUpRef]);
 
     function handleClick() {
-        setPopUp(true)
+        setPopUp(prev => !prev)
     }
 
     return(
@@ -29,7 +29,7 @@ export default function CreateProject() {
         <div className={styles.newProject} onClick={handleClick} >
             <span>Create project</span>
         </div> 
-        { popUp && <div style={{position: 'absolute'}} ref={PopUpRef}><CreateProjectPopUp /></div> }
+        { popUp && <div style={{position: 'absolute'}} ref={PopUpRef}><CreateProjectPopUp onClick={handleClick}/></div> }
         { popUp && <Foco color={"rgba(0,0,0, 0.4)"}/>}
         </>
     )

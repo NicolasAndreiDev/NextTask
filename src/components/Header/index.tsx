@@ -6,9 +6,11 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import CreateProjectPopUp from '../CreateProjectPopUp';
 import Foco from '../Foco';
+import ProjectsStar from './ProjectsStar';
 
 export default function Header() {
     const [popUp, setPopUp] = useState(false);
+    const [projectsFav, setProjectsFav] = useState(false);
     const PopUpRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -27,6 +29,10 @@ export default function Header() {
         setPopUp(prev => !prev)
     }
 
+    function handleClickFav() {
+        setProjectsFav(prev => !prev)
+    }
+
     return (
         <>
             <header className={styles.header}>
@@ -38,14 +44,18 @@ export default function Header() {
                     <div className={styles.projects}>
                         <span>recentes</span>
                     </div>
-                    <div className={styles.projects}>
-                        <span>Marcado com estrela</span>
+                    <div>
+                        <div className={styles.projects} onClick={handleClickFav}>
+                            <span>Marcado com estrela</span>
+                        
+                        </div>
+                        {projectsFav && <ProjectsStar />}
                     </div>
                     <button className={styles.createProject} onClick={handleClick}>Criar</button>
                 </div>
                 <UserInfo />
             </header>
-            {popUp && <div ref={PopUpRef} style={{position: "absolute"}}><CreateProjectPopUp /></div>}
+            {popUp && <div ref={PopUpRef} style={{position: "absolute"}}><CreateProjectPopUp onClick={handleClick}/></div>}
             {popUp && <Foco color={"rgba(0,0,0, 0.4)"} />}
         </>
     )
