@@ -1,0 +1,31 @@
+@import '@/styles/variaveis.scss';
+
+.typeLayout{
+    position: absolute;
+    top: 110%;
+    background-color: $cor-principal;
+    width: 100%;
+    border-radius: .4rem;
+    width: 16rem;
+    gap: 1rem;
+    display: flex;
+    left: 0;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    .type{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        &:hover{
+            background-color: $cinza-claro;
+        }
+        .icon{
+            width: 2.4rem;
+            height: 2.4rem;
+        }
+        .text{
+            font-size: $tamanho-do-texto;
+        }
+    }
+}

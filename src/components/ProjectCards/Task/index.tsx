@@ -5,32 +5,32 @@ import TaskPopUp from './TaskPopUp';
 import Foco from '@/components/Foco';
 
 export default function Task() {
-    const [popUp, setPopUp] = useState(false);
-    const PopUpRef = useRef<HTMLDivElement>(null)
+  const [popUp, setPopUp] = useState(false);
+  const PopUpRef = useRef<HTMLDivElement>(null)
 
-    function handleClick() {
-        setPopUp(true)
+  function handleClick() {
+    setPopUp(true)
+  }
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (PopUpRef.current && !PopUpRef.current.contains(event.target as Element)) {
+        setPopUp(false);
+      }
     }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [PopUpRef]);
 
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-          if (PopUpRef.current && !PopUpRef.current.contains(event.target as Element)) {
-            setPopUp(false);
-          }
-        }
-        document.addEventListener('mousedown', handleClickOutside);
-          return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-          };
-    }, [PopUpRef]);
-
-    return (
-        <>
-        <div className={styles.task} onClick={handleClick}>
-            <span className={styles.titleTask}>a</span>
-        </div>
-        { popUp && <div style={{position: 'absolute'}} ref={PopUpRef}> <TaskPopUp /> </div>}
-        { popUp && <Foco color={"rgba(0,0,0, 0.4)"}/>}
-        </>
-    )
+  return (
+    <>
+      <div className={styles.task} onClick={handleClick}>
+        <span className={styles.titleTask}>a</span>
+      </div>
+      {popUp && <div style={{ position: 'absolute' }} ref={PopUpRef}> <TaskPopUp /> </div>}
+      {popUp && <Foco color={"rgba(0,0,0, 0.4)"} />}
+    </>
+  )
 }

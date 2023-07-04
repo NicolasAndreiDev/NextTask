@@ -5,6 +5,7 @@
     position: sticky;
     top: 0;
     left: 0;
+    z-index: 1;
     margin-bottom: 2rem;
     justify-content: space-between;
     .esquerda{
@@ -15,6 +16,8 @@
             width: 8rem;
             height: 4rem;
             display: flex;
+            position: relative;
+            transition-duration: .4s;
             align-items: center;
             justify-content: space-around;
             border-radius: .4rem;
@@ -24,11 +27,13 @@
                 color: $cor-principal;
                 height: 2.4rem;
                 width: 2.4rem;
+                transition-duration: .4s;
             }
             .arrow{
                 color: $cor-principal;
                 height: 1.4rem;
                 width: 1.4rem;
+                transition-duration: .4s;
             }
         }
         .projectName{

@@ -1,9 +1,6 @@
-'use client';
 import { Metadata } from 'next';
-import { ApolloProvider } from '@apollo/client';
-import { client } from '@/connection';
-import { SessionProvider } from 'next-auth/react';
 import './globals.scss';
+import ProviderGlobal from './providerGlobal';
 
 export const metadata: Metadata = {
   title: {
@@ -20,11 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SessionProvider>
-          <ApolloProvider client={client}>
-            {children}
-          </ApolloProvider>
-        </SessionProvider>
+        <ProviderGlobal>
+          {children}
+        </ProviderGlobal>
       </body>
     </html>
   )

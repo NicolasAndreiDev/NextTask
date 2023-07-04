@@ -1,4 +1,3 @@
-'use client'
 import Header from "@/components/Header";
 import styles from './layoutStyle.module.scss';
 import { useSession } from 'next-auth/react';

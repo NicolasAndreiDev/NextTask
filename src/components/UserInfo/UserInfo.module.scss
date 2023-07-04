@@ -1,14 +1,17 @@
 @import '@/styles/variaveis.scss';
 
-.user{
+.user {
     height: 4rem;
     width: 4rem;
     display: grid;
     place-items: center;
     border-radius: 10rem;
-    &:hover{
+    cursor: pointer;
+
+    &:hover {
         background-color: $cinza-claro;
     }
+
     .imagemDefault {
         height: 3.2rem;
         width: 3.2rem;
@@ -16,7 +19,6 @@
         display: grid;
         place-items: center;
         background-color: $cor-secundaria;
-        cursor: pointer;
 
         .icon {
             color: $cor-principal;

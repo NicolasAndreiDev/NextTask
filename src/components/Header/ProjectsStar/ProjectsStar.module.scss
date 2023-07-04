@@ -1,7 +1,52 @@
+@import '@/styles/variaveis.scss';
+
 .projects{
     position: absolute;
     top: 110%;
-    height: 10rem;
-    width: 20rem;
-    background-color: black;
+    height: 6rem;
+    border-radius: .4rem;
+    padding: .8rem 0;
+    z-index: 4;
+    width: 28rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    background-color: $cor-principal;
+    .project{
+        display: flex;
+        height: 100%;
+        align-items: center;
+        padding: 0 2rem ;
+        cursor: pointer;
+        justify-content: space-between;
+        &:hover{
+            background-color: $cinza-claro;
+        }
+        .fundoProject{
+            width: 4.4rem;
+            height: 3.6rem;
+            border-radius: .4rem;
+        }
+        .projectInfo{
+            display: flex;
+            flex-direction: column;
+            .title{
+                font-size: $tamanho-do-texto;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            .info{
+                font-size: 1.4rem;
+            }
+        }
+        .star{
+            height: 1.6rem;
+            width: 1.6rem;
+            fill: gold;
+            color: gold;
+            cursor: pointer;
+        }
+    }
+    .text{
+        font-size: 1.6rem;
+        text-align: center;
+    }
 }

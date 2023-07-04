@@ -12,7 +12,7 @@ export default function UserInfo() {
     const PopUpRef = useRef<HTMLDivElement>(null)
 
     function handleClick() {
-        setPopUp(true);
+        setPopUp(prev => !prev);
     }
 
     useEffect(() => {
@@ -29,7 +29,7 @@ export default function UserInfo() {
 
     return (
         <>
-            { popUp && <div ref={PopUpRef} style={{position: "absolute"}}><UserPopUp /></div> }
+            { popUp && <div ref={PopUpRef} style={{position: "absolute"}}><UserPopUp onClick={handleClick}/></div> }
             { popUp && <Foco color={"rgba(0,0,0, 0.4)"}/> }
             { foto ? <Image src={'/Logo.png'} alt={"user_picture"} height={40} width={40} /> : 
               <div className={styles.user} onClick={handleClick}>
