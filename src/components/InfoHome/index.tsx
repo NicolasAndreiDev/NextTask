@@ -1,11 +1,10 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import FinishedProjects from './FinishedProjects';
 import styles from './InfoHome.module.scss';
 import MyProjects from './MyProjects';
 import ParticipateProjects from './ParticipateProject';
 import RecentProject from './RecentProject';
-import FinishedProjectsPopUp from './FinishedProjects/FinishedProjectsPopUp';
+import FinishedProjectsPopUp from './FinishedProjectsPopUp';
 import Foco from '../Foco';
 
 export default function InfoHome() {
@@ -34,8 +33,8 @@ export default function InfoHome() {
             <RecentProject />
             <MyProjects />
             <ParticipateProjects />
-            <FinishedProjects onClick={handleClick} />
-            {finishedProjects && <div ref={PopUpRef} style={{position: 'absolute'}}><FinishedProjectsPopUp /></div>}
+            <button className={styles.buttonFinish} onClick={handleClick}>View Completed Projects</button>
+            {finishedProjects && <div ref={PopUpRef} style={{position: 'absolute'}}><FinishedProjectsPopUp onClick={handleClick}/></div>}
             {finishedProjects && <Foco color={'rgba(0, 0, 0, 0.4)'}/>}
         </div>
     )

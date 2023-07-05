@@ -1,0 +1,57 @@
+@import '@/styles/variaveis.scss';
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    align-items: center;
+
+    .title {
+        font-size: 2rem;
+        margin: 0;
+    }
+
+    .icon {
+        height: 2rem;
+        width: 2rem;
+        padding: .4rem;
+        border-radius: .4rem;
+        cursor: pointer;
+        &:hover{
+            background-color: $cinza-claro;
+        }
+    }
+}
+
+.inviteEmail{
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    .inputEmail{
+        border: .1rem solid $cinza;
+        border-radius: .4rem;
+        &:focus{
+            outline: auto $cor-secundaria;
+        }
+    }
+    .typeUser{
+        background-color: $cinza;
+        border: none;
+        padding: 1rem 2rem;
+        display: flex;
+        align-items: center;
+        gap: .8rem;
+        border-radius: .4rem;
+        cursor: pointer;
+        &:hover{
+            background-color: $cinza-claro;
+        }
+    }
+    .compartilhar{
+        color: $cor-principal;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: .4rem;
+        background-color: $cor-secundaria;
+    }
+}

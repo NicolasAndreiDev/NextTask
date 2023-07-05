@@ -1,0 +1,86 @@
+@import '@/styles/variaveis.scss';
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+
+    .fullTitle {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .iconProject {
+            height: 2rem;
+            width: 2rem;
+        }
+
+        .title {
+            font-size: 2rem;
+            margin: 0;
+        }
+    }
+
+    .icon {
+        height: 2rem;
+        width: 2rem;
+        border-radius: .4rem;
+        padding: .4rem;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $cinza-claro;
+        }
+    }
+}
+
+.project{
+    padding: 0 2rem;
+    .info{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .nameProject{
+            font-size: $tamanho-do-texto;
+        }
+        .del{
+            background-color: $cinza;
+            display: flex;
+            padding: .8rem;
+            gap: .4rem;
+            align-items: center;
+            border-radius: .4rem;
+            cursor: pointer;
+            .iconDel{
+                height: 1.6rem;
+                width: 1.6rem;
+            }
+            .textDel{
+                font-size: $tamanho-do-texto;
+            }
+            &:hover{
+                background-color: $cinza-claro;
+            }
+        }
+    }
+    .linha{
+        width: 100%;
+        background-color: $cinza;
+        height: .1rem;
+        margin: 1rem 0;
+    }
+}
+
+.projects {
+    margin: 0 2rem 2rem 2rem;
+    height: 8rem;
+    border-radius: .4rem;
+    background-color: $cinza;
+    font-weight: bold;
+    display: grid;
+    place-items: center;
+    .text{
+        font-size: 1.4rem;
+    }
+}

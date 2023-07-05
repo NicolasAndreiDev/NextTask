@@ -1,7 +1,16 @@
+@import '@/styles/variaveis.scss';
+
 .config{
     width: 24rem;
     height: 10rem;
-    background-color: black;
+    background-color: $cor-principal;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: .4rem;
+    right: 0;
     position: absolute;
     top: 110%;
+    .text{
+        font-size: 1.6rem;
+        color: $cor-da-letra;
+    }
 }

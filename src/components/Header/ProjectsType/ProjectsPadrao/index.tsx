@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import styles from './ProjectsStar.module.scss';
+import styles from './ProjectsPadrao.module.scss';
 import { FiStar } from 'react-icons/fi';
 import { ColorOptions } from '@/components/ColorOptions';
 import { useRouter } from 'next/navigation';
 
-export default function ProjectsStar({onClick}: {onClick: () => void}) {
+export default function ProjectsPadrao({onClick}: {onClick: () => void}) {
     const route = useRouter();
     const [projectsFav, setProjectsFav] = useState(true);
 

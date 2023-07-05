@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import CreateProjectPopUp from '../CreateProjectPopUp';
 import Foco from '../Foco';
-import ProjectsStar from './ProjectsStar';
-import ProjectsRecents from './ProjectsRecents';
+import ProjectsStar from './ProjectsType/ProjectsStar';
+import ProjectsRecents from './ProjectsType/ProjectsRecents';
 
 interface ProjectsProps {
     projectsFav?: boolean,
@@ -68,7 +68,7 @@ export default function Header() {
                         <div className={styles.projects} onClick={() => handleClickProjects('projectsRecents')}>
                             <span>recentes</span>
                         </div>
-                        {projects.projectsRecents && <div  ref={(ref) => PopUpRef.current.recentsProjects = ref}><ProjectsRecents /></div>}
+                        {projects.projectsRecents && <div  ref={(ref) => PopUpRef.current.recentsProjects = ref}><ProjectsRecents onClick={() => handleClickProjects('projectsRecents')}/></div>}
                         {projects.projectsRecents && <Foco />}
                     </div>
                     <div>
