@@ -1,0 +1,156 @@
+@import '@/styles/variaveis.scss';
+
+.container {
+    padding: 2rem;
+
+    .top {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        box-sizing: border-box;
+
+        .iconClose {
+            height: 2rem;
+            width: 2rem;
+            padding: .4rem;
+            border-radius: .4rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $cinza-claro;
+            }
+        }
+    }
+
+    .title {
+        display: flex;
+        margin-top: 1rem;
+        margin-bottom: 4rem;
+        align-items: flex-start;
+
+        .icon {
+            height: 2.8rem;
+            width: 2.8rem;
+            margin-top: .8rem;
+        }
+
+
+        .box {
+            outline: none;
+            width: 100%;
+            resize: none;
+            font-weight: bold;
+            font-size: 2.8rem;
+            display: flex;
+            margin: .4rem;
+            border: none;
+            border-radius: .4rem;
+            box-sizing: border-box;
+            overflow: hidden;
+            font-family: 'Playfair', serif;
+
+            &:focus {
+                outline: auto $cor-secundaria;
+                background-color: $cinza-claro;
+            }
+        }
+    }
+
+    .describe {
+        display: flex;
+        flex-direction: column;
+
+        .label {
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .divDescribe {
+            background-color: $cinza;
+            padding: 2rem;
+            border-radius: .4rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $cinza-claro;
+            }
+
+            .detail {
+                font-size: $tamanho-do-texto;
+            }
+        }
+
+        .describeText {
+            outline: none;
+            width: 100%;
+            resize: none;
+            font-size: $tamanho-do-texto;
+            display: flex;
+            height: 3.9rem;
+            padding: 1rem;
+            box-sizing: border-box;
+            margin: .4rem;
+            border: .2rem solid $cinza;
+            border-radius: .4rem;
+            overflow: hidden;
+            font-family: 'Playfair', serif;
+
+            &:focus {
+                border: .2rem solid $cor-secundaria;
+            }
+        }
+    }
+
+    .comments {
+        display: flex;
+        flex-direction: column;
+
+        .label {
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .divComment {
+            background-color: $cinza;
+            padding: 1rem 2rem;
+            border-radius: .4rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $cinza-claro;
+            }
+
+            .textComment {
+                font-size: $tamanho-do-texto;
+            }
+        }
+
+        .commentText {
+            outline: none;
+            width: 100%;
+            resize: none;
+            font-size: $tamanho-do-texto;
+            display: flex;
+            margin: .4rem;
+            height: 3.9rem;
+            padding: 1rem;
+            box-sizing: border-box;
+            border: .2rem solid $cinza;
+            border-radius: .4rem;
+            overflow: hidden;
+            font-family: 'Playfair', serif;
+
+            &:focus {
+                border: .2rem solid $cor-secundaria;
+            }
+        }
+    }
+}

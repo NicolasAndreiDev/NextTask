@@ -1,0 +1,58 @@
+@import '@/styles/variaveis.scss';
+
+.container{
+    background-color: $cor-principal;
+    width: 20rem;
+    height: min-content;
+    border-radius: .4rem;
+    position: absolute;
+    left: 0;
+    top: 127%;
+    padding: 1rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    .top{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title{
+            margin: 0;
+            font-size: $tamanho-do-texto;
+        }
+        .icon{
+            height: 2rem;
+            width: 2rem;
+            cursor: pointer;
+            padding: .4rem;
+            border-radius: .4rem;
+            &:hover{
+                background-color: $cinza-claro;
+            }
+        }
+    }
+    .input{
+        width: 100%;
+        margin: 1rem 0;
+        box-sizing: border-box;
+        border-radius: .4rem;
+        border: .2rem solid $cinza;
+        outline: none;
+        &:focus{
+            border: .2rem solid $cor-secundaria;
+        }
+    }
+    .members{
+        font-size: $tamanho-do-texto;
+        font-weight: bold;
+    }
+    .allUsers{
+        display: flex;
+        margin: 1rem 0;
+        .user{
+            width: 3.2rem;
+            height: 3.2rem;
+            background-color: aquamarine;
+            border-radius: 10rem;
+        }
+    }
+}

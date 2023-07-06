@@ -9,18 +9,26 @@ import LayoutTypePopUp from './LayoutTypePopUp';
 import ConfigProject from './ConfigProject';
 import InviteUserPopUp from './InviteUserPopUp';
 import Foco from '@/components/Foco';
+import UsersPopUp from './UsersPopUp';
+import UserInfo from './UserInfo';
+
+const users = [1,2,3]
 
 interface OptionsProps {
     layout?: boolean,
     config?: boolean,
-    invite?: boolean
+    invite?: boolean,
+    users?: boolean,
+    userInfo?: boolean
 }
 
 export default function OptionsProject({ foto }: { foto: string }) {
     const [options, setOptions] = useState<OptionsProps>({
         layout: false,
         config: false,
-        invite: false
+        invite: false,
+        users: false,
+        userInfo: false
     });
     const PopUpRef = useRef<HTMLDivElement>(null)
 
@@ -54,11 +62,19 @@ export default function OptionsProject({ foto }: { foto: string }) {
                     <div className={styles.participantes}>
                         {foto ? <Image src={foto} alt={"usuários participantes"} height={24} width={24} /> :
                             <>
-                                <div className={styles.imagemDefault}></div>
-                                <div className={styles.imagemDefault}></div>
-                                <div className={styles.imagemDefault}></div>
-                                <div className={styles.countUsers}>
-                                    <span className={styles.count}>+12</span>
+                                {users.map((user) => {
+                                    return(
+                                        <>
+                                            <div key={user} className={styles.imagemDefault} onClick={() => handleClick('userInfo')}></div>
+                                            {options.userInfo && <UserInfo />}
+                                        </>
+                                    )
+                                })}
+                                <div className={styles.divUsers}>
+                                    <div className={styles.countUsers} onClick={() => handleClick('users')} style={options.users ? {backgroundColor: 'white'} : {}}>
+                                        <span className={styles.count} style={options.users ? {color: '#2d333a'}: {}}>+12</span>
+                                    </div>
+                                    {options.users && <UsersPopUp onClick={() => handleClick('users')}/>}
                                 </div>
                             </>
                         }
@@ -72,7 +88,7 @@ export default function OptionsProject({ foto }: { foto: string }) {
                     {options.config && <ConfigProject />}
                 </div>
             </div>
-            {options.invite && <div ref={PopUpRef}><InviteUserPopUp onClick={() => handleClick('invite')}/></div>}
+            {options.invite && <div ref={PopUpRef}><InviteUserPopUp onClick={() => handleClick('invite')} /></div>}
             {options.invite && <Foco color={"rgba(0, 0, 0, 0.4)"} />}
         </>
     )

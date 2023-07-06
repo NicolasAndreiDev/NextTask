@@ -9,7 +9,7 @@ export default function Task() {
   const PopUpRef = useRef<HTMLDivElement>(null)
 
   function handleClick() {
-    setPopUp(true)
+    setPopUp(prev => !prev)
   }
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Task() {
       <div className={styles.task} onClick={handleClick}>
         <span className={styles.titleTask}>a</span>
       </div>
-      {popUp && <div style={{ position: 'absolute' }} ref={PopUpRef}> <TaskPopUp /> </div>}
+      {popUp && <div style={{ position: 'absolute' }} ref={PopUpRef}> <TaskPopUp onClick={handleClick}/> </div>}
       {popUp && <Foco color={"rgba(0,0,0, 0.4)"} />}
     </>
   )

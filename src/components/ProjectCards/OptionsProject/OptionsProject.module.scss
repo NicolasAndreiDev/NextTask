@@ -52,33 +52,27 @@
             .imagemDefault{
                 height: 3.2rem;
                 width: 3.2rem;
-                position: relative;
+                cursor: pointer;
                 border-radius: 100%;
-                &:nth-child(n + 1) {
-                    background-color: bisque;
-                }
-                &:nth-child(n + 2){
-                    left: -.4rem;
-                    z-index: -1;
-                    background-color: rgb(180, 32, 32);
-                }
-                &:nth-child(n + 3){
-                    left: -.8rem;
-                    z-index: -2;
-                    background-color: rgb(41, 188, 247);
-                }
+                background-color: aqua;
             }
-            .countUsers{
-                height: 3.2rem;
-                min-width: 3.2rem;
-                display: grid;
-                place-items: center;
-                border-radius: 1.6rem;
-                background-color: $cinza-claro;
-                .count{
-                    font-size: 2rem;
-                    margin: 0 .8rem;
-                    color: $cor-principal;
+            .divUsers{
+                position: relative;
+                .countUsers{
+                    height: 3.2rem;
+                    min-width: 3.2rem;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 1.6rem;
+                    cursor: pointer;
+                    transition-duration: .4s;
+                    background-color: $cinza-claro;
+                    .count{
+                        font-size: 2rem;
+                        transition-duration: .4s;
+                        margin: 0 .8rem;
+                        color: $cor-principal;
+                    }
                 }
             }
         }

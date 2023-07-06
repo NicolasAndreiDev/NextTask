@@ -2,6 +2,7 @@ import PopUp from "@/components/PopUp";
 import { MdClose } from "react-icons/md";
 import styles from './InviteUserPopUp.module.scss';
 import { IoIosArrowDown } from "react-icons/io";
+import { FaUser } from "react-icons/fa";
 
 export default function InviteUserPopUp({onClick}: {onClick: () => void}) {
     return(
@@ -18,8 +19,20 @@ export default function InviteUserPopUp({onClick}: {onClick: () => void}) {
                 </button>
                 <button className={styles.compartilhar}>To share</button>
             </div>
-            <div>
-
+            <div className={styles.userInfo}>
+                <div className={styles.dados}>
+                    <div className={styles.user}>
+                        <FaUser className={styles.icon} />
+                    </div>
+                    <div className={styles.info}>
+                        <span className={styles.username}>Nicolas</span>
+                        <span className={styles.email}>nicolasandreislc@gmail.com · criador do projeto</span>
+                    </div>
+                </div>
+                <button className={styles.userType}>
+                    <span>Admin</span>
+                    <IoIosArrowDown />
+                </button>
             </div>
         </PopUp>
     )
