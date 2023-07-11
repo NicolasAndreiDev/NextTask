@@ -64,14 +64,17 @@ export default function Header() {
                         <Image src={"/assets/LogoRoxa.png"} alt={"NextTask"} height={32} width={32} />
                         <h1 className={styles.title}>NextTask</h1>
                     </Link>
-                    <div>
+                    <div className={styles.optionsHeaderMobile}>
+                        <span>Mais</span>
+                    </div>
+                    <div className={styles.typeProject}>
                         <div className={styles.projects} onClick={() => handleClickProjects('projectsRecents')}>
                             <span>recentes</span>
                         </div>
                         {projects.projectsRecents && <div  ref={(ref) => PopUpRef.current.recentsProjects = ref}><ProjectsRecents onClick={() => handleClickProjects('projectsRecents')}/></div>}
                         {projects.projectsRecents && <Foco />}
                     </div>
-                    <div>
+                    <div className={styles.typeProject}>
                         <div className={styles.projects} onClick={() => handleClickProjects('projectsFav')} style={projects.projectsFav ? { backgroundColor: 'rgba(220,220,220, 0.6)' } : {}}>
                             <span>Marcado com estrela</span>
                         </div>

@@ -5,36 +5,54 @@ import { HiOutlineEllipsisHorizontal } from 'react-icons/hi2';
 import { MdClose } from 'react-icons/md';
 import { IoMdAdd } from 'react-icons/io';
 import NewTask from './NewTask';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import ConfigCard from './ConfigCard';
+
+interface OptionsProps {
+  newTask: boolean,
+  optionsCard: boolean
+}
 
 export default function Card({ numTasks }: { numTasks: number }) {
-  const [newTask, setNewTask] = useState(false);
+  const [options, setOptions] = useState<OptionsProps>({
+    newTask: false,
+    optionsCard: false
+  });
+  const [value, setValue] = useState("To do");
   const tasks = [];
 
   for (let i = 0; i < numTasks; i++) {
     tasks.push(<Task key={i} />);
   }
 
-  function handleClick() {
-    setNewTask(prev => !prev)
+  function handleClick(name: keyof OptionsProps) {
+    setOptions((prev) => ({ ...prev, [name]: !prev[name] }))
+  }
+
+  function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
+    event.target.style.height = "auto";
+    event.target.style.height = `${event.target.scrollHeight}px`;
+    setValue(event.target.value);
   }
 
   return (
     <div className={styles.card}>
       <div className={styles.infoCard}>
-        <h2 className={styles.titleCard}>To do</h2>
-        <HiOutlineEllipsisHorizontal className={styles.options} />
+        <textarea className={styles.titleCard} value={value} onChange={handleChange} rows={1} spellCheck={false} />
+        <div className={styles.configLayout}>
+          <HiOutlineEllipsisHorizontal className={styles.options} onClick={() => handleClick('optionsCard')} />
+          {options.optionsCard && <ConfigCard close={() => handleClick('optionsCard')} onClick={() => {handleClick('newTask'), handleClick('optionsCard')}}/>}
+        </div>
       </div>
       <div className={styles.tasks}>{tasks}</div>
-      {newTask && <NewTask />}
-      {newTask ?
+      {options.newTask && <NewTask />}
+      {options.newTask ?
         <div className={styles.buttons}>
           <button className={styles.adicionarTarefaTrue}>Add task</button>
-          <MdClose className={styles.closeIcon} onClick={handleClick} />
-        </div> : <button className={styles.adicionarTask} onClick={handleClick}>
+          <MdClose className={styles.closeIcon} onClick={() => handleClick('newTask')} />
+        </div> : <button className={styles.adicionarTask} onClick={() => handleClick('newTask')}>
           <IoMdAdd className={styles.icon} />
-          <span className={styles.text}>
-            Add a new task</span>
+          <span className={styles.text}>Add a new task</span>
         </button>
       }
     </div>

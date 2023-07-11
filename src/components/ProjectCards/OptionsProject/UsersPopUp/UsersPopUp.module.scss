@@ -2,14 +2,14 @@
 
 .container{
     background-color: $cor-principal;
-    width: 20rem;
+    width: 24rem;
     height: min-content;
     border-radius: .4rem;
     position: absolute;
     left: 0;
     top: 127%;
     padding: 1rem;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: $shadow;
     .top{
         width: 100%;
         display: flex;
@@ -48,11 +48,13 @@
     .allUsers{
         display: flex;
         margin: 1rem 0;
+        gap: .4rem;
         .user{
-            width: 3.2rem;
-            height: 3.2rem;
+            min-width: 3.2rem;
+            min-height: 3.2rem;
             background-color: aquamarine;
             border-radius: 10rem;
+            cursor: pointer;
         }
     }
 }

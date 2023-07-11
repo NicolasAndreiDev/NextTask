@@ -1,9 +1,62 @@
-.container{
+@import '@/styles/variaveis.scss';
+
+.container {
     position: absolute;
     height: 20rem;
-    top: 110%;
+    top: 126%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    left: 0;
     border-radius: .4rem;
-    width: 20rem;
+    width: 24rem;
     background-color: white;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: $shadow;
+
+    .banner {
+        width: 100%;
+        height: 40%;
+        position: relative;
+        border-radius: .4rem .4rem 0 0;
+
+        .fundoBanner {
+            border-radius: .4rem .4rem 0 0;
+            background-color: navy;
+            height: 100%;
+            width: 100%;
+        }
+
+        .user {
+            height: 4.8rem;
+            width: 4.8rem;
+            bottom: -2.4rem;
+            left: 1rem;
+            display: grid;
+            place-items: center;
+            position: absolute;
+            background-color: black;
+            border-radius: 10rem;
+            .icon{
+                height: 2.4rem;
+                width: 2.4rem;
+                color: $cor-principal;
+            }
+        }
+    }
+
+    .dados {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        gap: .4rem;
+        height: 60%;
+        justify-content: center;
+        .username{
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .email{
+            font-size: $tamanho-do-texto;
+        }
+    }
 }

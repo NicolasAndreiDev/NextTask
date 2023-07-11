@@ -1,6 +1,6 @@
 @import '@/styles/variaveis.scss';
 
-.topProject{
+.topProject {
     display: flex;
     position: sticky;
     top: 0;
@@ -8,11 +8,13 @@
     z-index: 1;
     margin-bottom: 2rem;
     justify-content: space-between;
-    .esquerda{
+
+    .esquerda {
         display: flex;
         align-items: center;
         gap: 1rem;
-        .layoutType{
+
+        .layoutType {
             width: 8rem;
             height: 4rem;
             display: flex;
@@ -23,42 +25,75 @@
             border-radius: .4rem;
             background-color: $cinza-claro;
             cursor: pointer;
-            .template{
+
+            .template {
                 color: $cor-principal;
                 height: 2.4rem;
                 width: 2.4rem;
                 transition-duration: .4s;
             }
-            .arrow{
+
+            .arrow {
                 color: $cor-principal;
                 height: 1.4rem;
                 width: 1.4rem;
                 transition-duration: .4s;
             }
         }
-        .projectName{
+
+        .projectName {
             font-size: 2.8rem;
             margin: 0;
             color: $cor-principal;
         }
-        .linha{
+
+        .linha {
             height: 4rem;
             width: .1rem;
             background-color: $cinza-claro;
             margin: 0 2rem;
         }
-        .participantes{
+
+        .participantes {
             display: flex;
-            .imagemDefault{
-                height: 3.2rem;
-                width: 3.2rem;
-                cursor: pointer;
-                border-radius: 100%;
-                background-color: aqua;
+
+            .allUsers {
+                margin-right: 1rem;
+                display: flex;
+                gap: .4rem;
+
+                .userOptionsInfo {
+                    position: relative;
+                    .imagemDefault {
+                        height: 3.2rem;
+                        width: 3.2rem;
+                        display: grid;
+                        place-items: center;
+                        cursor: pointer;
+                        border-radius: 100%;
+                        background-color: rgb(85, 169, 218);
+
+                        &:nth-child(2) {
+                            background-color: rgb(247, 114, 52);
+                        }
+
+                        &:nth-child(3) {
+                            background-color: bisque;
+                        }
+
+                        .icon {
+                            height: 1.6rem;
+                            color: $cor-principal;
+                            width: 1.6rem;
+                        }
+                    }
+                }
             }
-            .divUsers{
+
+            .divUsers {
                 position: relative;
-                .countUsers{
+
+                .countUsers {
                     height: 3.2rem;
                     min-width: 3.2rem;
                     display: grid;
@@ -67,7 +102,8 @@
                     cursor: pointer;
                     transition-duration: .4s;
                     background-color: $cinza-claro;
-                    .count{
+
+                    .count {
                         font-size: 2rem;
                         transition-duration: .4s;
                         margin: 0 .8rem;
@@ -76,19 +112,24 @@
                 }
             }
         }
-        .inviteButton{
+
+        .inviteButton {
             width: 8rem;
+            height: 4rem;
             border: none;
             border-radius: .4rem;
+            transition-duration: .4s;
             padding: 1rem 2rem;
             color: $cor-principal;
             background-color: $cinza-claro;
             cursor: pointer;
         }
     }
-    .optionsDiv{
+
+    .optionsDiv {
         position: relative;
-        .options{
+
+        .options {
             background-color: $cinza-claro;
             width: 16rem;
             display: flex;
@@ -99,7 +140,8 @@
             transition-duration: .4s;
             border-radius: .4rem;
             cursor: pointer;
-            .icon{
+
+            .icon {
                 height: 2.8rem;
                 width: 2.8rem;
             }

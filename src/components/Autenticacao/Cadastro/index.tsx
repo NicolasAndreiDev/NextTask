@@ -1,7 +1,7 @@
 import FormPadrao from "../FormPadrao";
 import { useState } from "react";
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from "@/graphql/CreateUser";
+import { CREATE_USER } from "@/graphql/user/CreateUser";
 import bcrypt from 'bcryptjs';
 import { signIn } from 'next-auth/react';
 
@@ -21,6 +21,7 @@ interface ErrMessageProps {
   err: boolean;
   textErr: string;
 }
+
 
 export default function Cadastro({ onClick }: CadastroProps) {
   const [values, setValues] = useState<FormEvent>({ email: "", password: "" });
@@ -49,12 +50,15 @@ export default function Cadastro({ onClick }: CadastroProps) {
       return setErrMessage({err: true, textErr: 'As senhas digitadas não coincidem!'})
     }
 
+    const [username] = values.email.split('@');
+    const formattedUsername = username.replace(/^\w/, (c) => c.toUpperCase());
     const hashedPassword = await bcrypt.hash(values.password, 10)
 
     createUser({
       variables: {
         user: {
           email: values.email,
+          username: formattedUsername,
           password: hashedPassword,
         }
       }

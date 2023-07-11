@@ -2,7 +2,8 @@
 
 .newList{
     height: min-content;
-    width: 32rem;
+    width: 30rem;
+    box-sizing: border-box;
     border-radius: .4rem;
     background-color: $cor-principal;
     position: absolute;

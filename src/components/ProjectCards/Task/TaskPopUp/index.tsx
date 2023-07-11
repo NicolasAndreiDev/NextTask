@@ -8,36 +8,18 @@ import { useEffect, useRef, useState } from 'react';
 interface ValuesProps {
     title: string,
     describe: string,
-    comment: string
-}
-
-interface ViewProps {
-    describe: boolean,
-    comment: boolean
 }
 
 export default function TaskPopUp({ onClick }: { onClick: () => void }) {
-    const [values, setValues] = useState<ValuesProps>({ title: "To do", describe: "", comment: "" });
-    const [view, setView] = useState<ViewProps>({
-        describe: false,
-        comment: false
-    });
-    const textAreaRef = useRef<{
-        describeRef: HTMLTextAreaElement | null,
-        commentRef: HTMLTextAreaElement | null,
-    }>({
-        describeRef: null,
-        commentRef: null
-    });
+    const [values, setValues] = useState<ValuesProps>({ title: "To do", describe: ""});
+    const [view, setView] = useState(false);
+    const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {
-        if (textAreaRef.current.describeRef) {
-            textAreaRef.current.describeRef.focus()
+        if (textAreaRef.current) {
+            textAreaRef.current.focus()
         }
-        if (textAreaRef.current.commentRef) {
-            textAreaRef.current.commentRef.focus()
-        }
-    }, [view.describe, view.comment])
+    }, [view])
 
     function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
         const { name, value } = event.target;
@@ -46,9 +28,9 @@ export default function TaskPopUp({ onClick }: { onClick: () => void }) {
         setValues((prev) => ({ ...prev, [name]: value }))
     }
 
-    function handleClick(name: keyof ViewProps) {
-        if (!values[name]) {
-            setView((prev) => ({ ...prev, [name]: !prev[name] }));
+    function handleClick() {
+        if (!values.describe) {
+            setView(prev => !prev)
         }
     }
 
@@ -67,14 +49,7 @@ export default function TaskPopUp({ onClick }: { onClick: () => void }) {
                         <BsTextLeft />
                         <span>Describe</span>
                     </label>
-                    {view.describe ? <textarea ref={(ref) => textAreaRef.current.describeRef = ref} value={values.describe} name={"describe"} rows={1} onBlur={() => handleClick('describe')} onChange={handleChange} className={styles.describeText} /> : <div className={styles.divDescribe} onClick={() => handleClick('describe')}><span className={styles.detail}>Adicione uma descrição mais detalhada...</span></div>}
-                </div>
-                <div className={styles.comments}>
-                    <label className={styles.label}>
-                        <GoCommentDiscussion />
-                        <span>Comments</span>
-                    </label>
-                    {view.comment ? <textarea ref={(ref) => textAreaRef.current.commentRef = ref} value={values.comment} onChange={handleChange} name={"comment"} onBlur={() => handleClick('comment')} rows={1} className={styles.commentText} /> : <div className={styles.divComment} onClick={() => handleClick('comment')}><span className={styles.textComment}>Escrever um comentário...</span></div>}
+                    {view ? <textarea ref={textAreaRef} value={values.describe} name={"describe"} rows={1} onBlur={handleClick} onChange={handleChange} className={styles.describeText} /> : <div className={styles.divDescribe} onClick={handleClick}><span className={styles.detail}>Adicione uma descrição mais detalhada...</span></div>}
                 </div>
             </div>
         </PopUp>

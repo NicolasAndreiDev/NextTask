@@ -1,11 +1,13 @@
-.project {
-    overflow: auto;
+.background{
     display: flex;
-    flex-direction: column;
-    margin: 2rem;
-    height: 100%;
-    .projectCards {
-        display: flex;
-        gap: 2rem;
+    height: 100vh;
+    box-sizing: border-box;
+    .project {
+        overflow: auto;
+        margin: 8rem 2rem 4rem 2rem;
+        .projectCards {
+            display: flex;
+            gap: 2rem;
+        }
     }
 }

@@ -29,11 +29,11 @@
                 position: relative;
                 display: flex;
                 align-items: center;
-                border: .1rem solid $cinza;
+                border: .2rem solid $cinza;
                 border-radius: .4rem;
 
                 &:focus-within {
-                    border: $cor-secundaria 1px solid;
+                    border: $cor-secundaria 2px solid;
 
                     .labelType {
                         color: $cor-secundaria;
@@ -117,7 +117,8 @@
 
         .linha {
             width: 100%;
-            height: .1rem;
+            height: .2rem;
+            border-radius: 10rem;
             background-color: $cinza;
         }
     }
@@ -132,7 +133,7 @@
         font-size: 2.8rem;
         cursor: pointer;
         border-radius: .4rem;
-        border: 1px solid $cinza;
+        border: 2px solid $cinza;
     }
     .typeUser_button:nth-child(n+4) {
         margin-top: 1.6rem;

@@ -1,9 +1,9 @@
 "use client";
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './AllProjects.module.scss';
 import { FiStar } from 'react-icons/fi';
-import { ColorOptions } from '@/components/ColorOptions';
 import { useRouter } from 'next/navigation';
+import { UserContext } from '@/providers/UserProvider';
 
 interface AllProjectsProps {
     title: string,
@@ -12,23 +12,27 @@ interface AllProjectsProps {
 }
 
 export default function AllProjects({ title, children, icon }: AllProjectsProps) {
+    const { user } = useContext(UserContext);
     const route = useRouter();
-    const [star, setStar] = useState(false);
-    const [favorite, setFavorite] = useState(false);
-    
-    function handleMouse() {
-        if(favorite) {
+    const [star, setStar] = useState<{ active: boolean, favorite: boolean,projectId: string }>({
+        active: false,
+        favorite: false,
+        projectId: ""
+    });
+
+    function handleMouse(projectId: string) {
+        if (star.favorite && star.projectId === projectId) {
             return
         }
-        setStar(prev => !prev)
+        setStar((prev) => ({ ...prev, active: !prev.active, projectId: projectId }));
     }
 
     function handleClick() {
-        setFavorite(prev => !prev)
+        setStar((prev) => ({...prev, favorite: !prev.favorite}));
     }
 
-    function handleNavigation() {
-        route.push(`/projects/${'Novo-Projeto'}`)
+    function handleNavigation(routeName: string) {
+        route.push(`/projects/${routeName}`)
     }
 
     return (
@@ -38,12 +42,17 @@ export default function AllProjects({ title, children, icon }: AllProjectsProps)
                 <span>{title}</span>
             </div>
             <div className={styles.project}>
-                <div className={styles.card} style={{background: ColorOptions.color1}} onMouseEnter={handleMouse} onMouseLeave={handleMouse} onClick={handleNavigation}>
-                    <div className={styles.infoCard}>
-                        <h2 className={styles.nameProject}>Project</h2>
-                        <FiStar className={styles.star} onClick={handleClick} style={favorite ? (star ? {transform:'translateX(0)', fill: 'gold', color: 'gold'}: {}) : (star ? {transform:'translateX(0)'}: {})}/>
-                    </div>
-                </div>
+                {user?.projects?.map((project) => {
+                    return (
+                        <div key={`${project.id}-${title}`} className={styles.card} onMouseEnter={() => handleMouse(project.id)} onMouseLeave={() => handleMouse(project.id)}>
+                            <div className={styles.background} style={{ background: project.colorProject }} onClick={() => handleNavigation(project.titleProject)}></div>
+                            <div className={styles.infoCard}>
+                                <h2 className={styles.nameProject}>{project.titleProject}</h2>
+                                <FiStar className={styles.star} onClick={handleClick} style={star.favorite ? (star.active && star.projectId === project.id ? { transform: 'translateX(0)', fill: 'gold', color: 'gold' } : {}) : (star.active && star.projectId === project.id ? { transform: 'translateX(0)' } : {})} />
+                            </div>
+                        </div>
+                    )
+                })}
                 {children}
             </div>
         </div>

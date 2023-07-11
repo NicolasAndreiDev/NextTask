@@ -1,0 +1,23 @@
+@import '@/styles/variaveis.scss';
+
+.container{
+    position: absolute;
+    height: min-content;
+    top: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 24rem;
+    border-radius: .4rem;
+    background-color: $cor-principal;
+    box-shadow: $shadow;
+    z-index: 1;
+    padding: 1rem 0;
+    .option{
+        padding: 1rem;
+        cursor: pointer;
+        font-size: $tamanho-do-texto;
+        &:hover{
+            background-color: $cinza-claro;
+        }
+    }
+}

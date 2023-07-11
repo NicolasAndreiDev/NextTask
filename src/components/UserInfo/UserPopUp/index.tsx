@@ -1,69 +1,56 @@
 import PopUp from "@/components/PopUp";
 import styles from './UserPopUp.module.scss';
 import { FaUser } from 'react-icons/fa';
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { MdClose } from "react-icons/md";
 import { AiFillCamera } from 'react-icons/ai';
+import { UserContext } from "@/providers/UserProvider";
+import Image from "next/image";
+import { signOut } from "next-auth/react";
 
 interface ImageProps {
     banner: boolean,
     perfil: boolean
 }
 
-interface ValueProps {
-    username: string,
-    email: string
-}
-
-interface InputInfoProps {
-    username: boolean,
-    email: boolean
-}
-
 export default function UserPopUp({ onClick }: { onClick: () => void }) {
-    const [inputInfo, setInputInfo] = useState<InputInfoProps>({
-        username: true,
-        email: true
-    });
-    const [value, setValue] = useState<ValueProps>({
-        username: "Nicolas",
-        email: "nicolasandreislc@gmail.com"
-    })
+    const { user } = useContext(UserContext);
+    const [inputUsername, setInputUsername] = useState(true);
+    const [username, setUsername] = useState(user?.username)
     const [edit, setEdit] = useState<ImageProps>({
         banner: false,
         perfil: false,
     })
 
-    const inputRefs = useRef<{
-        username: HTMLInputElement | null,
-        email: HTMLInputElement | null
-    }>({
-        username: null,
-        email: null,
-    });
+    const usernameRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
-        if (inputRefs.current.username) {
-            inputRefs.current.username.focus();
+        if (usernameRef.current) {
+            usernameRef.current.focus();
         }
-        if (inputRefs.current.email) {
-            inputRefs.current.email.focus();
-        }
-    }, [inputInfo.email, inputInfo.username]);
+    }, [inputUsername]);
 
-    function handleClick(name: keyof InputInfoProps) {
-        setInputInfo((prev) => ({ ...prev, [name]: !prev[name] }))
+    function handleClick() {
+        setInputUsername(prev => !prev)
     }
 
     function handleMouse(name: keyof ImageProps) {
         setEdit((prev) => ({ ...prev, [name]: !prev[name] }))
     }
 
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setUsername(event.target.value)
+    }
+
     return (
         <PopUp>
             <div className={styles.banner}>
-                <div className={styles.picture} onMouseEnter={() => handleMouse('perfil')} onMouseLeave={() => handleMouse('perfil')}>
-                    <FaUser className={styles.icon} />
+                {user?.bannerImage ? <Image src={user.bannerImage} alt={"UserBanner"} width={360} className={styles.bannerFundo} height={80} /> : <div className={styles.bannerFundo}></div>}
+                <div className={styles.userPicture} onMouseEnter={() => handleMouse('perfil')} onMouseLeave={() => handleMouse('perfil')}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    {user?.perfilImage ? <img src={user.perfilImage} alt={"UserImage"} className={styles.picture} /> : <div className={styles.picture}>
+                        <FaUser className={styles.icon} />
+                    </div>}
                     {edit.perfil && <div className={styles.editPerfil}><AiFillCamera className={styles.cam} /></div>}
                 </div>
                 <MdClose className={styles.close} onClick={onClick} />
@@ -73,40 +60,23 @@ export default function UserPopUp({ onClick }: { onClick: () => void }) {
             </div>
             <div className={styles.userInfo}>
                 <span className={styles.labelTitle}>Username</span>
-                {inputInfo.username ? (
-                    <div
-                        className={styles.inputsDiv}
-                        onClick={() => handleClick('username')}
-                    >
-                        <span>{value.username}</span>
+                {inputUsername ? (
+                    <div className={styles.inputsDiv} onClick={handleClick}>
+                        <span>{username}</span>
                     </div>
                 ) : (
                     <input
-                        ref={(ref) => inputRefs.current.username = ref}
-                        value={value.username}
+                        ref={usernameRef}
+                        value={username}
                         className={styles.inputs}
-                        onBlur={() => { handleClick('username') }}
-                    />
-                )}
-                <span className={styles.labelTitle}>Email</span>
-                {inputInfo.email ? (
-                    <div
-                        className={styles.inputsDiv}
-                        onClick={() => handleClick('email')}
-                    >
-                        <span>{value.email}</span>
-                    </div>
-                ) : (
-                    <input
-                        ref={(ref) => inputRefs.current.email = ref}
-                        value={value.email}
-                        className={styles.inputs}
-                        onBlur={() => { handleClick('email') }}
+                        name={"username"}
+                        onChange={handleChange}
+                        onBlur={handleClick}
                     />
                 )}
             </div>
             <button className={styles.saveButton} onClick={onClick}>Save</button>
-            <button className={styles.buttonExit}>Log out</button>
+            <button className={styles.buttonExit} onClick={() => signOut()}>Log out</button>
         </PopUp>
     )
 }

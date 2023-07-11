@@ -1,14 +1,16 @@
 import PopUp from "@/components/PopUp";
 import styles from './CreateProject.module.scss';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MdClose } from "react-icons/md";
 import Image from "next/image";
 import { useMutation } from "@apollo/client";
-import { CREATE_PROJECT } from "@/graphql/CreateProject";
+import { CREATE_PROJECT } from "@/graphql/projects/CreateProject";
 import { ColorOptions } from "../ColorOptions";
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/providers/UserProvider";
 
 export default function CreateProjectPopUp({ onClick }: { onClick: () => void }) {
+    const { user } = useContext(UserContext);
     const route = useRouter();
     const [colorProject, setColorProject] = useState(ColorOptions.color1);
     const [value, setValue] = useState("");
@@ -24,10 +26,13 @@ export default function CreateProjectPopUp({ onClick }: { onClick: () => void })
         createProject({
             variables: {
                 project: {
-                    userId: "649b4dc3d36d8d2451a7b06d",
+                    userId: user?.id,
                     titleProject: value,
+                    colorProject: colorProject,
+                    dataAcesso: new Date(),
+                    finishedProject: false,
                     participantes: [
-                        "nicolasandreislc@gmail.com"
+                        user?.email,
                     ]
                 }
             }

@@ -1,4 +1,7 @@
+'use client';
 import ProjectCards from "@/components/ProjectCards"
+import { UserContext } from "@/providers/UserProvider"
+import { useContext } from "react"
 
 interface ProjectProps {
     params: {
@@ -13,7 +16,12 @@ export async function generateMetadata({ params }: ProjectProps) {
 }
 
 export default function Project({ params }: ProjectProps) {
-    return(
-        <ProjectCards />
+    const { user } = useContext(UserContext);
+    const project = user?.projects?.find((project) => project.titleProject === params.id)
+
+    return (
+        <>
+            {project && <ProjectCards participantes={project.participantes} color={project.colorProject} projectName={params.id} />}
+        </>
     )
 }

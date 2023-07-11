@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
 import CredentialsProvider from "next-auth/providers/credentials";
-import { USER_LOGIN } from "@/graphql/UserLogin";
+import { USER_LOGIN } from "@/graphql/user/UserLogin";
 import { client } from "@/connection";
 
 export const authOptions = {

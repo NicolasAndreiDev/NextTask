@@ -1,21 +1,25 @@
 @import "@/styles/variaveis.scss";
 
-.header{
-    height: 6.4rem;
+.header {
+    min-height: 6.4rem;
     display: flex;
-    position: sticky;
+    box-sizing: border-box;
+    width: 100%;
+    position:   fixed;
     top: 0;
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
     background-color: $cor-principal;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: $shadow;
     z-index: 2;
-    .esquerda{
+
+    .esquerda {
         display: flex;
         align-items: center;
         gap: 1rem;
-        .logo{
+
+        .logo {
             display: flex;
             gap: 1rem;
             text-decoration: none;
@@ -23,21 +27,25 @@
             cursor: pointer;
             align-items: center;
             font-size: 1.6rem;
-            .title{
+
+            .title {
                 margin: 0;
             }
         }
-        .projects{
+
+        .projects {
             font-size: 1.6rem;
             padding: 1rem;
 
             cursor: pointer;
             border-radius: .4rem;
-            &:hover{
+
+            &:hover {
                 background-color: $cinza-claro;
             }
         }
-        .createProject{
+
+        .createProject {
             border: none;
             border-radius: .4rem;
             background-color: $cor-secundaria;
@@ -46,10 +54,30 @@
             font-size: 1.6rem;
             cursor: pointer;
             padding: 1rem;
-            &:hover{
+
+            &:hover {
                 background-color: rgb(142, 78, 245, 0.9);
             }
         }
+
+        .optionsHeaderMobile {
+            display: none;
+        }
     }
-    
+}
+
+@media screen and (max-width: 670px) {
+    .header {
+        .esquerda {
+            .typeProject {
+                display: none;
+            }
+            .createProject {
+                display: none;
+            }
+            .optionsHeaderMobile {
+                display: flex;
+            }
+        }
+    }
 }
