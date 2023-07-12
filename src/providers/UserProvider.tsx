@@ -12,8 +12,10 @@ interface UserProps {
   projects?: [{
     titleProject: string, 
     id: string, 
+    userId: string,
     colorProject: string,
     participantes: string[]
+    cardTasks: [{id: string,titleCard: string, tasks: [{id: string,titleTask: string}]}]
   }];
   favProjects?: [];
 }

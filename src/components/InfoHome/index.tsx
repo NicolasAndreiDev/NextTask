@@ -7,10 +7,8 @@ import RecentProject from './RecentProject';
 import FinishedProjectsPopUp from './FinishedProjectsPopUp';
 import Foco from '../Foco';
 import FavProjects from './FavProjects';
-import { UserContext } from '@/providers/UserProvider';
 
 export default function InfoHome() {
-  const {user} = useContext(UserContext);
   const [finishedProjects, setFinishedProjects] = useState(false);
   const PopUpRef = useRef<HTMLDivElement>(null)
 
@@ -30,8 +28,6 @@ export default function InfoHome() {
   function handleClick() {
     setFinishedProjects(prev => !prev)
   }
-
-  console.log(user)
 
   return (
     <div className={styles.home}>

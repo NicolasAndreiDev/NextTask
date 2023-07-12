@@ -4,7 +4,7 @@ import styles from './Task.module.scss';
 import TaskPopUp from './TaskPopUp';
 import Foco from '@/components/Foco';
 
-export default function Task() {
+export default function Task({titleTask}: {titleTask: string}) {
   const [popUp, setPopUp] = useState(false);
   const PopUpRef = useRef<HTMLDivElement>(null)
 
@@ -27,9 +27,9 @@ export default function Task() {
   return (
     <>
       <div className={styles.task} onClick={handleClick}>
-        <span className={styles.titleTask}>a</span>
+        <span className={styles.titleTask}>{titleTask}</span>
       </div>
-      {popUp && <div style={{ position: 'absolute' }} ref={PopUpRef}> <TaskPopUp onClick={handleClick}/> </div>}
+      {popUp && <div style={{ position: 'absolute' }} ref={PopUpRef}> <TaskPopUp titleTask={titleTask} onClick={handleClick}/> </div>}
       {popUp && <Foco color={"rgba(0,0,0, 0.4)"} />}
     </>
   )

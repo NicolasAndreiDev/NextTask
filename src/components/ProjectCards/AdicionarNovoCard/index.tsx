@@ -1,10 +1,10 @@
 "use client";
 import { useState } from 'react';
-import styles from './AdicionarNovaLista.module.scss';
-import NewList from './NewList';
+import styles from './AdicionarNovoCard.module.scss';
 import { IoMdAdd } from 'react-icons/io';
+import NewCard from './NewCard';
 
-export default function AdicionarNovaLista() {
+export default function AdicionarNovoCard({userId, projectId}: {userId: string, projectId: string}) {
     const [popUp, setPopUp] = useState(false);
 
     function handleClick() {
@@ -15,9 +15,9 @@ export default function AdicionarNovaLista() {
         <div className={styles.createList}>
             <button className={styles.novaLista} onClick={handleClick}>
                 <IoMdAdd className={styles.icon} />
-                <span>Add list</span>
+                <span>Add card</span>
             </button>
-            {popUp && <NewList close={handleClick} />}
+            {popUp && <NewCard close={handleClick} userId={userId} projectId={projectId} />}
         </div>
     )
 }

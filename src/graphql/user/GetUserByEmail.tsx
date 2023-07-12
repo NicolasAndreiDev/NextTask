@@ -15,6 +15,14 @@ export const GET_USER_BY_EMAIL = gql`
                 userId
                 dataAcesso
                 colorProject
+                cardTasks {
+                    id
+                    titleCard
+                    tasks {
+                        id
+                        titleTask
+                    }
+                }
             }
         }
     }

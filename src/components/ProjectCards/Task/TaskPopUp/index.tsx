@@ -10,8 +10,8 @@ interface ValuesProps {
     describe: string,
 }
 
-export default function TaskPopUp({ onClick }: { onClick: () => void }) {
-    const [values, setValues] = useState<ValuesProps>({ title: "To do", describe: ""});
+export default function TaskPopUp({ titleTask ,onClick }: { titleTask: string, onClick: () => void }) {
+    const [values, setValues] = useState<ValuesProps>({ title: titleTask, describe: ""});
     const [view, setView] = useState(false);
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
 

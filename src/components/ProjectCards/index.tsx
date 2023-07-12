@@ -1,7 +1,9 @@
 import styles from './ProjectCard.module.scss';
 import Card from "./Card";
 import OptionsProject from './OptionsProject';
-import AdicionarNovaLista from './AdicionarNovaLista';
+import AdicionarNovoCard from './AdicionarNovoCard';
+import { useContext } from 'react';
+import { UserContext } from '@/providers/UserProvider';
 
 interface ProjectCardsProps {
     color: string,
@@ -9,19 +11,30 @@ interface ProjectCardsProps {
     participantes: string[],
 }
 
-export default function ProjectCards({color, projectName, participantes}: ProjectCardsProps) {
+export default function ProjectCards({ color, projectName, participantes }: ProjectCardsProps) {
+    const { user } = useContext(UserContext);
+    const project = user?.projects?.find(project => project.titleProject === projectName)
+    const cards = project?.cardTasks.length
+    const allCards: number[] = []
+
+    if (cards) {
+        for (let i = 1; i < cards + 1; i++) {
+            allCards.push(i);
+        }
+    }
+
+
     return (
-        <div className={styles.background} style={{background: color}}>
+        <div className={styles.background} style={{ background: color }}>
             <div className={styles.project} >
-                <OptionsProject foto='' titleProject={projectName} participantes={participantes}/>
+                <OptionsProject foto='' titleProject={projectName} participantes={participantes} />
                 <div className={styles.projectCards}>
-                    <Card numTasks={3} />
-                    <Card numTasks={6} />
-                    <Card numTasks={3} />
-                    <Card numTasks={10} />
-                    <Card numTasks={3} />
-                    <Card numTasks={12} />
-                    <AdicionarNovaLista />
+                    {project?.cardTasks?.map((card) => {
+                        return (
+                            <Card key={card.id} optionValue={allCards} task={card.tasks} titleCard={card.titleCard} cardId={card.id} projectId={project.id} userId={project.userId} />
+                        )
+                    })}
+                    <AdicionarNovoCard projectId={project!.id} userId={project!.userId} />
                 </div>
             </div>
         </div>
