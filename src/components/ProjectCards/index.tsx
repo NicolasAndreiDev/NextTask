@@ -8,7 +8,13 @@ import { UserContext } from '@/providers/UserProvider';
 interface ProjectCardsProps {
     color: string,
     projectName: string,
-    participantes: string[],
+    participantes:  [{
+        id: string,
+        username: string, 
+        email: string, 
+        bannerColor: string, 
+        perfilColor: string
+    }]
 }
 
 export default function ProjectCards({ color, projectName, participantes }: ProjectCardsProps) {
@@ -23,11 +29,10 @@ export default function ProjectCards({ color, projectName, participantes }: Proj
         }
     }
 
-
     return (
         <div className={styles.background} style={{ background: color }}>
             <div className={styles.project} >
-                <OptionsProject foto='' titleProject={projectName} participantes={participantes} />
+                <OptionsProject titleProject={projectName} participantes={participantes} projectId={project!.id}/>
                 <div className={styles.projectCards}>
                     {project?.cardTasks?.map((card) => {
                         return (

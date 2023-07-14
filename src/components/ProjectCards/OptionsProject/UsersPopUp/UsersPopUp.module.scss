@@ -48,13 +48,23 @@
     .allUsers{
         display: flex;
         margin: 1rem 0;
-        gap: .4rem;
-        .user{
-            min-width: 3.2rem;
-            min-height: 3.2rem;
-            background-color: aquamarine;
-            border-radius: 10rem;
-            cursor: pointer;
+        gap: .2rem;
+        .oUsuario{
+            position: relative;
+            .user{
+                min-width: 3.2rem;
+                min-height: 3.2rem;
+                border-radius: 10rem;
+                display: grid;
+                place-items: center;
+                cursor: pointer;
+                .icon{
+                    height: 1.6rem;
+                    width: 1.6rem;
+                    color: $cor-principal;
+                }
+            }
         }
+        
     }
 }

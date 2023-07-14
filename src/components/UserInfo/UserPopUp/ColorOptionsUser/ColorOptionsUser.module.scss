@@ -1,0 +1,32 @@
+@import '@/styles/variaveis.scss';
+
+.colorOptions {
+    display: flex;
+    margin-top: 2rem;
+    flex-direction: column;
+    .title {
+        font-size: $tamanho-do-texto;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    .options{
+        display: flex;
+        gap: .2rem;
+        .fundoColor{
+            height: 2.4rem;
+            width: 2.4rem;
+            border: .2rem solid transparent;
+            border-radius: 10rem;
+            display: grid;
+            transition-duration: .4s;
+            place-items: center;
+            .color{
+                height: 2rem;
+                width: 2rem;
+                cursor: pointer;
+                transition-duration: .4s;
+                border-radius: 10rem;
+            }
+        }
+    }
+}

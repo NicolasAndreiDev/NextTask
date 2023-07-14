@@ -6,8 +6,8 @@ export const GET_USER_BY_EMAIL = gql`
             id   
             email
             username
-            perfilImage
-            bannerImage
+            perfilColor
+            bannerColor
             projects {
                 id
                 titleProject
@@ -15,12 +15,14 @@ export const GET_USER_BY_EMAIL = gql`
                 userId
                 dataAcesso
                 colorProject
+                finishedProject
                 cardTasks {
                     id
                     titleCard
                     tasks {
                         id
                         titleTask
+                        infoTask
                     }
                 }
             }

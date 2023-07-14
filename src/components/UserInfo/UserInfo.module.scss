@@ -1,5 +1,6 @@
 @import '@/styles/variaveis.scss';
 
+
 .user {
     height: 4rem;
     width: 4rem;
@@ -15,6 +16,7 @@
     .imagemDefault {
         height: 3.2rem;
         width: 3.2rem;
+        object-fit: cover;
         border-radius: 100%;
         display: grid;
         place-items: center;

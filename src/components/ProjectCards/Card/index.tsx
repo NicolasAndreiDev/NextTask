@@ -16,7 +16,7 @@ interface OptionsProps {
 
 interface CardProps {
   titleCard: string,
-  task: [{ id: string, titleTask: string }],
+  task: [{ id: string, titleTask: string, infoTask: string }],
   userId: string,
   projectId: string,
   cardId: string,
@@ -66,13 +66,13 @@ export default function Card({ titleCard, task, userId, projectId, cardId, optio
         <textarea className={styles.titleCard} name={'titleCardText'} value={values.titleCardText} onChange={handleChange} rows={1} spellCheck={false} />
         <div className={styles.configLayout}>
           <HiOutlineEllipsisHorizontal className={styles.options} onClick={() => handleClick('optionsCard')} />
-          {options.optionsCard && <ConfigCard close={() => handleClick('optionsCard')} onClick={() => { handleClick('newTask'), handleClick('optionsCard') }} optionValue={optionValue} />}
+          {options.optionsCard && <ConfigCard projectId={projectId} userId={userId} cardId={cardId} close={() => handleClick('optionsCard')} onClick={() => { handleClick('newTask'), handleClick('optionsCard') }} optionValue={optionValue} />}
         </div>
       </div>
       <div className={styles.tasks}>
         {task.map((task) => {
           return (
-            <Task key={task.id} titleTask={task.titleTask} />
+            <Task key={task.id} describeText={task.infoTask} titleTask={task.titleTask} />
           )
         })}
       </div>

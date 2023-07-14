@@ -4,7 +4,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
 import { BsEyeFill, BsEyeSlashFill, BsGithub } from 'react-icons/bs';
 import ErrMessage from '../Err';
-import { useSession, signIn } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 interface FormEvent {
     email: string;

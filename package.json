@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.16",
+    "@apollo/client": "^3.8.0-rc.0",
+    "@apollo/experimental-nextjs-app-support": "^0.0.0-commit-473354a",
     "@types/node": "20.3.0",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",

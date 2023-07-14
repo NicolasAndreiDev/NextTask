@@ -10,7 +10,7 @@ import ConfigProject from './ConfigProject';
 import InviteUserPopUp from './InviteUserPopUp';
 import Foco from '@/components/Foco';
 import UsersPopUp from './UsersPopUp';
-import UserInfo from './UserInfo';
+import UserInfo from './UserInfoProject';
 import { FaUser } from 'react-icons/fa';
 
 interface OptionsProps {
@@ -23,12 +23,18 @@ interface OptionsProps {
 }
 
 interface OptionsProjectProps {
-  foto: string,
   titleProject: string,
-  participantes: string[]
+  projectId: string,
+  participantes: [{
+    id: string,
+    username: string, 
+    email: string, 
+    bannerColor: string, 
+    perfilColor: string
+  }]
 }
 
-export default function OptionsProject({ foto, titleProject, participantes }: OptionsProjectProps) {
+export default function OptionsProject({ titleProject, projectId, participantes }: OptionsProjectProps) {
   const [options, setOptions] = useState<OptionsProps>({
     layout: false,
     config: false,
@@ -38,6 +44,7 @@ export default function OptionsProject({ foto, titleProject, participantes }: Op
     activeUser: null,
   });
   const PopUpRef = useRef<HTMLDivElement>(null);
+  const userList = participantes.slice(0, 4);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -63,74 +70,49 @@ export default function OptionsProject({ foto, titleProject, participantes }: Op
     <>
       <div className={styles.topProject}>
         <div className={styles.esquerda}>
-          <div
-            className={styles.layoutType}
-            onClick={() => handleClick('layout')}
-            style={options.layout ? { backgroundColor: 'white' } : {}}
-          >
-            <HiOutlineTemplate
-              className={styles.template}
-              style={options.layout ? { color: '#2d333a' } : {}}
-            />
-            <IoIosArrowDown
-              className={styles.arrow}
-              style={options.layout ? { color: '#2d333a', transform: 'rotate(180deg)' } : {}}
-            />
+          <div className={styles.layoutType} onClick={() => handleClick('layout')} style={options.layout ? { backgroundColor: 'white' } : {}}>
+            <HiOutlineTemplate className={styles.template} style={options.layout ? { color: '#2d333a' } : {}}/>
+            <IoIosArrowDown className={styles.arrow} style={options.layout ? { color: '#2d333a', transform: 'rotate(180deg)' } : {}}/>
             {options.layout && <LayoutTypePopUp />}
           </div>
           <h2 className={styles.projectName}>{titleProject}</h2>
           <div className={styles.linha}></div>
           <div className={styles.participantes}>
-            {foto ? (
-              <Image src={foto} alt={'usuários participantes'} height={24} width={24} />
-            ) : (
               <>
                 <div className={styles.allUsers}>
-                  {participantes.map((user) => {
+                  {userList.map((user) => {
                     return (
-                      <div key={user} className={styles.userOptionsInfo}>
-                        <div className={styles.imagemDefault} onClick={() => handleClickUser(user)}>
+                      <div key={user.id} className={styles.userOptionsInfo}>
+                        <div className={styles.imagemDefault} style={{backgroundColor: user.perfilColor}} onClick={() => handleClickUser(user.id)}>
                           <FaUser className={styles.icon} />
                         </div>
-                        {options.userInfo && options.activeUser === user && <UserInfo />}
+                        {options.userInfo && options.activeUser === user.id && <UserInfo bannerColor={user.bannerColor} perfilColor={user.perfilColor} username={user.username} email={user.email} />}
                       </div>
                     );
                   })}
                 </div>
                 {participantes.length >= 4 && <div className={styles.divUsers}>
-                  <div
-                    className={styles.countUsers}
-                    onClick={() => handleClick('users')}
-                    style={options.users ? { backgroundColor: 'white' } : {}}
-                  >
+                  <div className={styles.countUsers} onClick={() => handleClick('users')} style={options.users ? { backgroundColor: 'white' } : {}}>
                     <span className={styles.count} style={options.users ? { color: '#2d333a' } : {}}>
                       +{participantes.length}
                     </span>
                   </div>
-                  {options.users && <UsersPopUp onClick={() => handleClick('users')} />}
+                  {options.users && <UsersPopUp onClick={() => handleClick('users')} users={participantes}/>}
                 </div>}
               </>
-            )}
           </div>
           <button className={styles.inviteButton} onClick={() => handleClick('invite')} style={options.invite ? { backgroundColor: 'white', color: '#2d333a' } : {}}>Invite</button>
         </div>
         <div className={styles.optionsDiv}>
-          <div
-            className={styles.options}
-            onClick={() => handleClick('config')}
-            style={options.config ? { backgroundColor: 'white' } : {}}
-          >
-            <HiOutlineEllipsisHorizontal
-              className={styles.icon}
-              style={options.config ? { color: '#2d333a' } : {}}
-            />
+          <div className={styles.options} onClick={() => handleClick('config')} style={options.config ? { backgroundColor: 'white' } : {}}>
+            <HiOutlineEllipsisHorizontal className={styles.icon} style={options.config ? { color: '#2d333a' } : {}}/>
           </div>
-          {options.config && <ConfigProject />}
+          {options.config && <ConfigProject projectId={projectId}/>}
         </div>
       </div>
       {options.invite && (
         <div ref={PopUpRef}>
-          <InviteUserPopUp onClick={() => handleClick('invite')} />
+          <InviteUserPopUp users={participantes} onClick={() => handleClick('invite')} />
         </div>
       )}
       {options.invite && <Foco color={'rgba(0, 0, 0, 0.4)'} />}

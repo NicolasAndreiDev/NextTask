@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { UserContext } from "@/providers/UserProvider";
 
 export default function CreateProjectPopUp({ onClick }: { onClick: () => void }) {
-    const { user } = useContext(UserContext);
+    const { user, updateUserInfo } = useContext(UserContext);
     const route = useRouter();
     const [colorProject, setColorProject] = useState(ColorOptions.color1);
     const [value, setValue] = useState("");
@@ -32,12 +32,13 @@ export default function CreateProjectPopUp({ onClick }: { onClick: () => void })
                     dataAcesso: new Date(),
                     finishedProject: false,
                     participantes: [
-                        user?.email,
+                        user?.id,
                     ]
                 }
             }
         })
         .then(() => {
+            updateUserInfo()
             route.push(`/projects/${value}`)
         })
         .catch((error) => {

@@ -56,14 +56,28 @@
 
         .participantes {
             display: flex;
+            height: 4rem;
+            align-items: center;
 
             .allUsers {
                 margin-right: 1rem;
                 display: flex;
                 gap: .4rem;
+                align-items: center;
+                position: relative;
 
                 .userOptionsInfo {
                     position: relative;
+
+                    &:nth-child(2) {
+                        left: 2.4rem;
+                        position: absolute;  
+                    }
+                    
+                    &:nth-child(3) {
+                        left: 1.2rem;
+                    }
+
                     .imagemDefault {
                         height: 3.2rem;
                         width: 3.2rem;
@@ -71,15 +85,7 @@
                         place-items: center;
                         cursor: pointer;
                         border-radius: 100%;
-                        background-color: rgb(85, 169, 218);
 
-                        &:nth-child(2) {
-                            background-color: rgb(247, 114, 52);
-                        }
-
-                        &:nth-child(3) {
-                            background-color: bisque;
-                        }
 
                         .icon {
                             height: 1.6rem;

@@ -5,6 +5,6 @@ module.exports = nextConfig
 
 module.exports = {
     images: {
-      domains: ['png.pngtree.com', /* outros domínios permitidos */],
+      domains: ['png.pngtree.com', 'epipoca.com.br'],
     },
 };

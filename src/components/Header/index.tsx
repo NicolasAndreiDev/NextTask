@@ -3,11 +3,12 @@ import Image from 'next/image';
 import UserInfo from '../UserInfo';
 import styles from './header.module.scss';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import CreateProjectPopUp from '../CreateProjectPopUp';
 import Foco from '../Foco';
 import ProjectsStar from './ProjectsType/ProjectsStar';
 import ProjectsRecents from './ProjectsType/ProjectsRecents';
+import { UserContext } from '@/providers/UserProvider';
 
 interface ProjectsProps {
     projectsFav?: boolean,
@@ -15,6 +16,7 @@ interface ProjectsProps {
 }
 
 export default function Header() {
+    const {user} = useContext(UserContext);
     const [popUp, setPopUp] = useState(false);
     const [projects, setProjects] = useState<ProjectsProps>({
         projectsFav: false,
@@ -83,7 +85,7 @@ export default function Header() {
                     </div>
                     <button className={styles.createProject} onClick={handleClick}>Criar</button>
                 </div>
-                <UserInfo />
+                <UserInfo perfilColor={user?.perfilColor}/>
             </header>
             {popUp && <div ref={(ref) => PopUpRef.current.createProject = ref} style={{ position: "absolute" }}><CreateProjectPopUp onClick={handleClick} /></div>}
             {popUp && <Foco color={"rgba(0,0,0, 0.4)"} />}

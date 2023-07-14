@@ -1,10 +1,12 @@
 import { MdClose } from 'react-icons/md';
 import styles from './NewCard.module.scss';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_CARD } from '@/graphql/projects/CreateCard';
+import { UserContext } from '@/providers/UserProvider';
 
 export default function NewCard({ close, userId, projectId }: { close: () => void, userId: string, projectId: string }) {
+    const { updateUserInfo } = useContext(UserContext);
     const [createCard, { loading, error }] = useMutation(CREATE_CARD);
     const [value, setValue] = useState("");
 
@@ -27,6 +29,7 @@ export default function NewCard({ close, userId, projectId }: { close: () => voi
                 }
             }
         }).then(() => {
+            updateUserInfo()
             close()
         })
         .catch((err) => {

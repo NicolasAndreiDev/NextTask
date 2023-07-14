@@ -22,7 +22,6 @@ interface ErrMessageProps {
   textErr: string;
 }
 
-
 export default function Cadastro({ onClick }: CadastroProps) {
   const [values, setValues] = useState<FormEvent>({ email: "", password: "" });
   const [createUser, { loading, error }] = useMutation(CREATE_USER);
