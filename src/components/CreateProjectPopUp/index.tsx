@@ -39,7 +39,6 @@ export default function CreateProjectPopUp({ onClick }: { onClick: () => void })
         })
         .then(() => {
             updateUserInfo()
-            route.push(`/projects/${value}`)
         })
         .catch((error) => {
             console.log(error)

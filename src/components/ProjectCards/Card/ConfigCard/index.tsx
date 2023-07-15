@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import styles from './ConfigCard.module.scss';
 import MoveCard from './MoveCard';
 import { useMutation } from '@apollo/client';
-import { DELETE_CARD } from '@/graphql/projects/DeleteCard';
+import { DELETE_CARD } from '@/graphql/card/DeleteCard';
 import { UserContext } from '@/providers/UserProvider';
 
 type ConfigCard = {
@@ -11,10 +11,12 @@ type ConfigCard = {
     optionValue: number[],
     userId: string,
     projectId: string,
-    cardId: string
+    cardId: string,
+    position: number
 }
 
-export default function ConfigCard({onClick, close, optionValue, userId, projectId, cardId}: ConfigCard) {
+export default function ConfigCard({onClick, close, position, optionValue, userId, projectId, cardId}: ConfigCard) {
+    const { updateUserInfo } = useContext(UserContext);
     const [move, setMove] = useState(false);
     const [deleteCard, {loading, error}] = useMutation(DELETE_CARD);
 
@@ -27,6 +29,7 @@ export default function ConfigCard({onClick, close, optionValue, userId, project
             }
         })
         .then(() => {
+            updateUserInfo()
             close()
         })
         .catch((err) => {
@@ -43,7 +46,7 @@ export default function ConfigCard({onClick, close, optionValue, userId, project
             <span className={styles.option} onClick={handleDelete}>Delete card</span>
             <span className={styles.option} onClick={onClick}>Add task</span>
             <span className={styles.option} onClick={handleClick}>Move card</span>
-            {move && <MoveCard onClick={handleClick} close={close} optionValue={optionValue}/>}
+            {move && <MoveCard position={position} cardId={cardId} projectId={projectId} userId={userId} onClick={handleClick} close={close} optionValue={optionValue}/>}
         </div>
     )
 }

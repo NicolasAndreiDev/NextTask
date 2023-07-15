@@ -2,7 +2,7 @@ import { MdClose } from 'react-icons/md';
 import styles from './NewCard.module.scss';
 import { useContext, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { CREATE_CARD } from '@/graphql/projects/CreateCard';
+import { CREATE_CARD } from '@/graphql/card/CreateCard';
 import { UserContext } from '@/providers/UserProvider';
 
 export default function NewCard({ close, userId, projectId }: { close: () => void, userId: string, projectId: string }) {

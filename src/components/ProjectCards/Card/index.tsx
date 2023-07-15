@@ -4,10 +4,11 @@ import styles from './Card.module.scss';
 import { HiOutlineEllipsisHorizontal } from 'react-icons/hi2';
 import { MdClose } from 'react-icons/md';
 import { IoMdAdd } from 'react-icons/io';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import ConfigCard from './ConfigCard';
-import { CREATE_TASK } from '@/graphql/projects/CreateTask';
+import { CREATE_TASK } from '@/graphql/task/CreateTask';
 import { useMutation } from '@apollo/client';
+import { UserContext } from '@/providers/UserProvider';
 
 interface OptionsProps {
   newTask: boolean,
@@ -16,14 +17,16 @@ interface OptionsProps {
 
 interface CardProps {
   titleCard: string,
-  task: [{ id: string, titleTask: string, infoTask: string }],
+  task: [{ id: string, titleTask: string, infoTask: string, finishedTask: boolean }],
   userId: string,
   projectId: string,
   cardId: string,
-  optionValue: number[]
+  optionValue: number[],
+  position: number
 }
 
-export default function Card({ titleCard, task, userId, projectId, cardId, optionValue }: CardProps) {
+export default function Card({ titleCard, position, task, userId, projectId, cardId, optionValue }: CardProps) {
+  const { updateUserInfo } = useContext(UserContext);
   const [options, setOptions] = useState<OptionsProps>({
     newTask: false,
     optionsCard: false
@@ -45,6 +48,7 @@ export default function Card({ titleCard, task, userId, projectId, cardId, optio
         }
       }
     }).then(() => {
+      updateUserInfo()
       handleClick('newTask')
     })
   }
@@ -66,13 +70,13 @@ export default function Card({ titleCard, task, userId, projectId, cardId, optio
         <textarea className={styles.titleCard} name={'titleCardText'} value={values.titleCardText} onChange={handleChange} rows={1} spellCheck={false} />
         <div className={styles.configLayout}>
           <HiOutlineEllipsisHorizontal className={styles.options} onClick={() => handleClick('optionsCard')} />
-          {options.optionsCard && <ConfigCard projectId={projectId} userId={userId} cardId={cardId} close={() => handleClick('optionsCard')} onClick={() => { handleClick('newTask'), handleClick('optionsCard') }} optionValue={optionValue} />}
+          {options.optionsCard && <ConfigCard position={position} projectId={projectId} userId={userId} cardId={cardId} close={() => handleClick('optionsCard')} onClick={() => { handleClick('newTask'), handleClick('optionsCard') }} optionValue={optionValue} />}
         </div>
       </div>
       <div className={styles.tasks}>
         {task.map((task) => {
           return (
-            <Task key={task.id} describeText={task.infoTask} titleTask={task.titleTask} />
+            <Task key={task.id} taskFinish={task.finishedTask} cardId={cardId} userId={userId} projectId={projectId} taskId={task.id} describeText={task.infoTask} titleTask={task.titleTask} />
           )
         })}
       </div>

@@ -8,7 +8,7 @@ import { useMutation } from '@apollo/client';
 import { DELETE_PROJECT } from '@/graphql/projects/DeleteProject';
 
 export default function FinishedProjectsPopUp({ onClick }: { onClick: () => void }) {
-    const { user } = useContext(UserContext);
+    const { user, updateUserInfo } = useContext(UserContext);
     const finishedProjects = user?.projects?.filter((project) => project.finishedProject === true);
     const [deleteProject, {loading, error}] = useMutation(DELETE_PROJECT)
 
@@ -20,6 +20,7 @@ export default function FinishedProjectsPopUp({ onClick }: { onClick: () => void
             }
         })
         .then(() => {
+            updateUserInfo()
             onClick()
         })
     }

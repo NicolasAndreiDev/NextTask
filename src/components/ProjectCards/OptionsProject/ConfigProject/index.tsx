@@ -6,7 +6,7 @@ import { FINISHED_PROJECT } from '@/graphql/projects/FinishedProject';
 import { useRouter } from 'next/navigation';
 
 export default function ConfigProject({projectId}: {projectId: string}) {
-    const { user } = useContext(UserContext);
+    const { user, updateUserInfo } = useContext(UserContext);
     const route = useRouter();
     const [finishedProject, {loading, error}] = useMutation(FINISHED_PROJECT);
 
@@ -18,6 +18,7 @@ export default function ConfigProject({projectId}: {projectId: string}) {
             }
         })
         .then(() => {
+            updateUserInfo()
             route.push('/')
         })
         .catch((err) => {

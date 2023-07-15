@@ -8,6 +8,9 @@ export const GET_USER_BY_EMAIL = gql`
             username
             perfilColor
             bannerColor
+            favProjects {
+                projectId
+            }
             projects {
                 id
                 titleProject
@@ -23,6 +26,7 @@ export const GET_USER_BY_EMAIL = gql`
                         id
                         titleTask
                         infoTask
+                        finishedTask
                     }
                 }
             }

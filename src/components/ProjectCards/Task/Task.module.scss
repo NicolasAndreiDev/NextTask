@@ -6,12 +6,15 @@
     width: 100%;
     background-color: $cinza-claro-hover;
     padding: 1rem ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     box-sizing: border-box;
     cursor: pointer;
     &:hover{
         background-color: $cinza-claro;
     }
-    .titleTask{
+    .titleTask, .icon{
         font-size: 1.6rem;
     }
 }

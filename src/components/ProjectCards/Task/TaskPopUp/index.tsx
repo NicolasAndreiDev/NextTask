@@ -2,24 +2,34 @@ import styles from './TaskPopUp.module.scss';
 import PopUp from "@/components/PopUp";
 import { BsTextLeft } from "react-icons/bs";
 import { MdClose, MdOutlineSubtitles } from "react-icons/md";
-import { GoCommentDiscussion } from 'react-icons/go';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { UPDATE_TASK } from '@/graphql/task/UpdateTask';
+import { UserContext } from '@/providers/UserProvider';
 
 interface ValuesProps {
     title: string,
-    describe: string,
+    describe: string | null,
+    finish: boolean
 }
 
 interface TaskPopUpProps {
     titleTask: string,
+    userId: string,
+    projectId: string,
+    cardId: string,
+    taskId: string,
+    finish: boolean,
     onClick: () => void,
     describeText: string
 }
 
-export default function TaskPopUp({ titleTask, describeText, onClick }: TaskPopUpProps) {
-    const [values, setValues] = useState<ValuesProps>({ title: titleTask, describe: describeText });
+export default function TaskPopUp({ userId, finish, projectId, cardId, taskId, titleTask, describeText, onClick }: TaskPopUpProps) {
+    const { updateUserInfo } = useContext(UserContext);
+    const [values, setValues] = useState<ValuesProps>({ title: titleTask, describe: describeText, finish: finish });
     const [view, setView] = useState(false);
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
+    const [updateTask, { loading, error }] = useMutation(UPDATE_TASK);
 
     useEffect(() => {
         if (values.describe) {
@@ -39,10 +49,34 @@ export default function TaskPopUp({ titleTask, describeText, onClick }: TaskPopU
     }
 
     function handleClick() {
-        if (values.describe !== "") {
-            return setView(true)
+        if (values.describe !== null && "") {
+            return
         }
         setView(prev => !prev)
+    }
+
+    function hanldeClickFinish(name: keyof ValuesProps) {
+        setValues((prev) => ({ ...prev, [name]: !prev[name] }))
+    }
+
+    function handleSubmit() {
+        updateTask({
+            variables: {
+                userId,
+                projectId,
+                cardId,
+                taskId,
+                task: {
+                    titleTask: values.title,
+                    infoTask: values.describe,
+                    finishedTask: values.finish
+                }
+            }
+        })
+        .then(() => {
+            updateUserInfo()
+            onClick()
+        })
     }
 
     return (
@@ -64,15 +98,15 @@ export default function TaskPopUp({ titleTask, describeText, onClick }: TaskPopU
                         <textarea ref={textAreaRef} value={values.describe} name={"describe"} spellCheck={false} rows={1} onBlur={handleClick} onChange={handleChange} className={styles.describeText} />
                         :
                         view ?
-                            <textarea ref={textAreaRef} value={values.describe} name={"describe"} rows={1} onBlur={handleClick} onChange={handleChange} className={styles.describeText} />
+                            <textarea ref={textAreaRef} value={values.describe ? values.describe : ""} name={"describe"} rows={1} onBlur={handleClick} onChange={handleChange} className={styles.describeText} />
                             :
                             <div className={styles.divDescribe} onClick={handleClick}><span className={styles.detail} spellCheck={false}>Adicione uma descrição mais detalhada...</span></div>
                     }
                 </div>
                 <div className={styles.linha}></div>
                 <div className={styles.buttons}>
-                    <button className={styles.salvar}>Salvar</button>
-                    <button className={styles.complete}>Complete Task</button>
+                    <button className={styles.salvar} onClick={handleSubmit}>Salvar</button>
+                    <button className={styles.complete} style={values.finish ? { backgroundColor: 'gray' } : {}} onClick={() => hanldeClickFinish('finish')}>Complete Task</button>
                 </div>
             </div>
         </PopUp>

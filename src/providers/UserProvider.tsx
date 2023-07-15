@@ -2,6 +2,7 @@ import { createContext, useCallback, useEffect, useState } from "react";
 import { useSession } from 'next-auth/react';
 import { useQuery } from "@apollo/client";
 import { GET_USER_BY_EMAIL } from "@/graphql/user/GetUserByEmail";
+import { client } from "@/connection";
 
 interface UserProps {
   id: string;
@@ -9,16 +10,17 @@ interface UserProps {
   email: string;
   perfilColor: string;
   bannerColor: string;
+  favProjects?: [{projectId: string}];
   projects?: [{
     titleProject: string,
     id: string,
     userId: string,
+    dataAcesso: Date,
     colorProject: string,
     participantes: string[],
     finishedProject: boolean,
-    cardTasks: [{ id: string, titleCard: string, tasks: [{ id: string, titleTask: string, infoTask: string }] }]
+    cardTasks: [{ id: string, titleCard: string, tasks: [{ id: string, titleTask: string, infoTask: string, finishedTask: boolean }] }]
   }];
-  favProjects?: [];
 }
 
 interface Props {
@@ -39,10 +41,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       email: sessionData?.user?.email
     },
     skip: !sessionData || !sessionData.user?.email,
-    ssr: true,
   });
   
   const updateUserInfo = useCallback(() => {
+    client.cache.reset();
     if (userData && userData.getUserByEmail) {
       const { id, username, email, perfilColor, bannerColor, projects, favProjects } = userData.getUserByEmail;
       setUser({ id, username, email, perfilColor, bannerColor, projects, favProjects });

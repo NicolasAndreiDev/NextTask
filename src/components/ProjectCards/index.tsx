@@ -7,7 +7,7 @@ import { UserContext } from '@/providers/UserProvider';
 
 interface ProjectCardsProps {
     color: string,
-    projectName: string,
+    projectId: string,
     participantes:  [{
         id: string,
         username: string, 
@@ -17,9 +17,9 @@ interface ProjectCardsProps {
     }]
 }
 
-export default function ProjectCards({ color, projectName, participantes }: ProjectCardsProps) {
+export default function ProjectCards({ color, projectId, participantes }: ProjectCardsProps) {
     const { user } = useContext(UserContext);
-    const project = user?.projects?.find(project => project.titleProject === projectName)
+    const project = user?.projects?.find(project => project.id === projectId)
     const cards = project?.cardTasks.length
     const allCards: number[] = []
 
@@ -32,14 +32,14 @@ export default function ProjectCards({ color, projectName, participantes }: Proj
     return (
         <div className={styles.background} style={{ background: color }}>
             <div className={styles.project} >
-                <OptionsProject titleProject={projectName} participantes={participantes} projectId={project!.id}/>
+                {project && <OptionsProject titleProject={project.titleProject} participantes={participantes} projectId={project.id}/>}
                 <div className={styles.projectCards}>
-                    {project?.cardTasks?.map((card) => {
+                    {project?.cardTasks?.map((card, index) => {
                         return (
-                            <Card key={card.id} optionValue={allCards} task={card.tasks} titleCard={card.titleCard} cardId={card.id} projectId={project.id} userId={project.userId} />
+                            <Card position={index} key={card.id} optionValue={allCards} task={card.tasks} titleCard={card.titleCard} cardId={card.id} projectId={project.id} userId={project.userId} />
                         )
                     })}
-                    <AdicionarNovoCard projectId={project!.id} userId={project!.userId} />
+                    {project && <AdicionarNovoCard projectId={project.id} userId={project.userId} />}
                 </div>
             </div>
         </div>

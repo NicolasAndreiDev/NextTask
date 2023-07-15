@@ -3,7 +3,6 @@ import ProjectCards from "@/components/ProjectCards"
 import { GET_ALL_USERS } from "@/graphql/user/GetAllUsers";
 import { UserContext } from "@/providers/UserProvider"
 import { useQuery } from "@apollo/client";
-import { DynamicOptions } from "next/dynamic";
 import { useContext } from "react"
 
 interface ProjectProps {
@@ -18,11 +17,9 @@ export async function generateMetadata({ params }: ProjectProps) {
     }
 }
 
-export const dynamic = 'no-store'
-
 export default function Project({ params }: ProjectProps) {
-    const { user } =useContext(UserContext);
-    const project = user?.projects?.find((project) => project.titleProject === params.id);
+    const { user } = useContext(UserContext);
+    const project = user?.projects?.find((project) => project.id === params.id);
     const {loading: loadingData, error: errorData, data: userData} = useQuery(GET_ALL_USERS, {
         variables: {
             users: project?.participantes
@@ -31,7 +28,7 @@ export default function Project({ params }: ProjectProps) {
 
     return (
         <>
-            {project && userData && <ProjectCards participantes={userData.getUsersById} color={project.colorProject} projectName={params.id} />}
+            {project && userData && <ProjectCards participantes={userData.getUsersById} color={project.colorProject} projectId={project.id} />}
         </>
     )
 }

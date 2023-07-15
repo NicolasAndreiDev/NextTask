@@ -1,19 +1,28 @@
 import { BsArrowLeftShort } from 'react-icons/bs';
 import styles from './MoveCard.module.scss';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { MdClose } from 'react-icons/md';
+import { useMutation } from '@apollo/client';
+import { MOVE_CARD } from '@/graphql/card/MoveCard';
+import { UserContext } from '@/providers/UserProvider';
 
 type MoveCard = {
+    userId: string,
+    projectId: string,
+    position: number,
+    cardId: string,
     onClick: () => void,
     close: () => void,
     optionValue: number[]
 }
 
-export default function MoveCard({ onClick, close, optionValue }: MoveCard) {
+export default function MoveCard({ userId, position, projectId, cardId, onClick, close, optionValue }: MoveCard) {
+    const { updateUserInfo } = useContext(UserContext);
     const [value, setValue] = useState<{ number: number; select: boolean }>({
-        number: 1,
+        number: position + 1,
         select: false,
     });
+    const [moverCard, {loading, error}] = useMutation(MOVE_CARD);
 
     function handleClick() {
         setValue((prev) => ({ ...prev, select: !prev.select }));
@@ -22,6 +31,22 @@ export default function MoveCard({ onClick, close, optionValue }: MoveCard) {
     function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
         const selectedNumber = parseInt(event.target.value, 10);
         setValue({ number: selectedNumber, select: false });
+    }
+
+    function handleSubmit() {
+        const newPosition = value.number > 1 ? value.number - 2 : value.number
+        moverCard({
+            variables: {
+                userId,
+                projectId,
+                cardId,
+                position: newPosition
+            }
+        })
+        .then(() => {
+            updateUserInfo()
+            close()
+        })
     }
 
     return (
@@ -35,7 +60,7 @@ export default function MoveCard({ onClick, close, optionValue }: MoveCard) {
                 <span className={styles.text}>{value.number}</span>
             </div>
             {value.select && (
-                <select className={styles.select} value={value.number.toString()} onChange={handleSelectChange}>
+                <select className={styles.select} value={value.number.toString()} onChange={(event) => {handleSelectChange(event), handleSubmit()}}>
                     {optionValue.map((option, index) => {
                         return (
                             <option key={index} value={option}>{option}</option>
