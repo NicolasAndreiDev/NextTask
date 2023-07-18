@@ -3,7 +3,7 @@
 .projects{
     position: absolute;
     top: 110%;
-    height: 6rem;
+    height: min-content;
     border-radius: .4rem;
     padding: .8rem 0;
     z-index: 4;
@@ -12,11 +12,9 @@
     background-color: $cor-principal;
     .project{
         display: flex;
-        height: 100%;
         align-items: center;
-        padding: 0 2rem ;
+        padding: 1rem 2rem ;
         cursor: pointer;
-        justify-content: space-between;
         &:hover{
             background-color: $cinza-claro;
         }
@@ -28,6 +26,7 @@
         .projectInfo{
             display: flex;
             flex-direction: column;
+            margin-left: 1rem;
             .title{
                 font-size: $tamanho-do-texto;
                 font-weight: bold;
@@ -40,6 +39,8 @@
         .star{
             height: 1.6rem;
             width: 1.6rem;
+            position: absolute;
+            right: 2rem;
             fill: gold;
             color: gold;
             cursor: pointer;
@@ -48,5 +49,6 @@
     .text{
         font-size: 1.6rem;
         text-align: center;
+        padding: 2rem 0rem;
     }
 }

@@ -57,9 +57,9 @@ export default function Login({ onClick }: LoginProps) {
         },
       },
     })
-      .catch(() => {
-        setErrMessage({ err: true, textErr: "Email ou senha incorretos!" });
-      });
+    .catch(() => {
+      setErrMessage({ err: true, textErr: "Email ou senha incorretos!" });
+    });
   }
 
   return (

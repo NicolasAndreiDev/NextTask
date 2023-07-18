@@ -11,11 +11,12 @@ export default function RecentProject() {
         const dataAcesso = new Date(project.dataAcesso);
         return dataAcesso >= fourHoursAgo;
     });
+    const newList = projectsRecents?.filter((project) => project.finishedProject != true)
     const Icon = <BiTimeFive />
 
     return (
         <>
-           {projectsRecents && projectsRecents.length > 0 && <AllProjects projectsList={projectsRecents} title={"Recently Viewed"} icon={Icon} />}
+           {newList && newList.length > 0 && <AllProjects projectsList={newList} title={"Recently Viewed"} icon={Icon} />}
         </>
     )
 }

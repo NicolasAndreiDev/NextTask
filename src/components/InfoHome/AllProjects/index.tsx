@@ -3,6 +3,8 @@ import { useState } from 'react';
 import styles from './AllProjects.module.scss';
 import { FiStar } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
+import { useMutation } from '@apollo/client';
+import { UPDATE_FAV_PROJECTS } from '@/graphql/projects/UpdateFavProject';
 
 interface Project {
     id: string;
@@ -19,21 +21,22 @@ interface AllProjectsProps {
 
 export default function AllProjects({ projectsList, title, children, icon }: AllProjectsProps) {
     const route = useRouter();
-    const [star, setStar] = useState<{ active: boolean, favorite: boolean,projectId: string }>({
+    const [star, setStar] = useState<{ active: boolean, favorite: boolean, projectId: string }>({
         active: false,
         favorite: false,
         projectId: ""
     });
+    const [updateFavProjects, { loading, error }] = useMutation(UPDATE_FAV_PROJECTS);
 
     function handleMouse(projectId: string) {
-        if (star.favorite && star.projectId === projectId) {
+        if (star.favorite === true && star.projectId === projectId) {
             return
         }
         setStar((prev) => ({ ...prev, active: !prev.active, projectId: projectId }));
     }
 
     function handleClick() {
-        setStar((prev) => ({...prev, favorite: !prev.favorite}));
+        setStar((prev) => ({ ...prev, favorite: !prev.favorite }));
     }
 
     function handleNavigation(routeName: string) {

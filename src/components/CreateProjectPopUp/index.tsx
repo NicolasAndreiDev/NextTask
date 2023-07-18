@@ -11,7 +11,6 @@ import { UserContext } from "@/providers/UserProvider";
 
 export default function CreateProjectPopUp({ onClick }: { onClick: () => void }) {
     const { user, updateUserInfo } = useContext(UserContext);
-    const route = useRouter();
     const [colorProject, setColorProject] = useState(ColorOptions.color1);
     const [value, setValue] = useState("");
     const [createProject, { loading, error }] = useMutation(CREATE_PROJECT);
@@ -23,6 +22,9 @@ export default function CreateProjectPopUp({ onClick }: { onClick: () => void })
     };
 
     function handleSubmit() {
+        if(value === "") {
+            return
+        }
         createProject({
             variables: {
                 project: {
@@ -39,6 +41,7 @@ export default function CreateProjectPopUp({ onClick }: { onClick: () => void })
         })
         .then(() => {
             updateUserInfo()
+            onClick() 
         })
         .catch((error) => {
             console.log(error)
@@ -69,7 +72,7 @@ export default function CreateProjectPopUp({ onClick }: { onClick: () => void })
                         ></div>
                     ))}
                 </div>
-                <button className={styles.button} onClick={() => {onClick(), handleSubmit()}}>Create</button>
+                <button className={styles.button} onClick={handleSubmit}>Create</button>
             </div>
         </PopUp>
     )

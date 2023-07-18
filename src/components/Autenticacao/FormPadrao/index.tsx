@@ -92,7 +92,7 @@ export default function FormPadrao({
     function handleSignIn(type: string) {
         signIn(type, {
             callbackUrl: '/',
-        });
+        })
     }
 
     return (

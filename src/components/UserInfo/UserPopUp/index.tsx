@@ -10,7 +10,7 @@ import { UPDATE_USER } from "@/graphql/user/UpdateUser";
 import ColorOptionsUser from "./ColorOptionsUser";
 
 export default function UserPopUp({ onClick }: { onClick: () => void }) {
-    const { user } = useContext(UserContext);
+    const { user, updateUserInfo } = useContext(UserContext);
     const [inputUsername, setInputUsername] = useState(true);
     const [select, selectColors] = useState<{
         banner: string,
@@ -49,6 +49,7 @@ export default function UserPopUp({ onClick }: { onClick: () => void }) {
             }
         })
             .then(() => {
+                updateUserInfo()
                 onClick()
             })
             .catch((err) => {
@@ -94,3 +95,7 @@ export default function UserPopUp({ onClick }: { onClick: () => void }) {
         </PopUp>
     )
 }
+function updataUserInfo() {
+    throw new Error("Function not implemented.");
+}
+

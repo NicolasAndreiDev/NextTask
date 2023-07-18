@@ -1,0 +1,55 @@
+@import '@/styles/variaveis.scss';
+
+.options {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+
+    .projects {
+        font-size: 1.6rem;
+        padding: 1rem;
+        position: relative;
+
+        cursor: pointer;
+        border-radius: .4rem;
+
+        &:hover {
+            background-color: $cinza-claro;
+        }
+    }
+
+    .createProject {
+        border: none;
+        border-radius: .4rem;
+        background-color: $cor-secundaria;
+        color: $cor-principal;
+        font-family: 'Playfair', serif;
+        font-size: 1.6rem;
+        cursor: pointer;
+        padding: 1rem;
+
+        &:hover {
+            background-color: rgb(142, 78, 245, 0.9);
+        }
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .options{
+        position: absolute;
+        top: 150%;
+        left: 0;
+        background-color: $cor-principal;
+        padding: 2rem 0;
+        border-radius: .4rem;
+        box-shadow: $shadow;
+        gap: 0;
+        flex-direction: column;
+        .projects {
+            border-radius: 0;
+        }
+        .createProject{
+            border-radius: 0;
+        }
+    }
+}

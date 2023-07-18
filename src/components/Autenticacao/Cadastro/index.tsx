@@ -67,8 +67,8 @@ export default function Cadastro({ onClick }: CadastroProps) {
         password: values.password,
         callbackUrl: '/',
       })
-    }).catch((error) => {
-      setErrMessage({err: true, textErr: error.message});
+    }).catch((err) => {
+      setErrMessage({err: true, textErr: err});
     });
   }
 
