@@ -16,7 +16,7 @@ export default function RecentProject() {
 
     return (
         <>
-           {newList && newList.length > 0 && <AllProjects projectsList={newList} title={"Recently Viewed"} icon={Icon} />}
+           {newList && newList.length > 0 && <AllProjects participate={""} projectsList={newList} title={"Recently Viewed"} icon={Icon} />}
         </>
     )
 }

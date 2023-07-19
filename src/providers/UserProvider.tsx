@@ -10,7 +10,9 @@ interface UserProps {
   email: string;
   perfilColor: string;
   bannerColor: string;
-  favProjects?: [{projectId: string}];
+  favProjects?: [{
+    projectId: string
+  }];
   projects?: [{
     titleProject: string,
     id: string,
@@ -19,7 +21,16 @@ interface UserProps {
     colorProject: string,
     participantes: string[],
     finishedProject: boolean,
-    cardTasks: [{ id: string, titleCard: string, tasks: [{ id: string, titleTask: string, infoTask: string, finishedTask: boolean }] }]
+    cardTasks: [{ 
+      id: string, 
+      titleCard: string, 
+      tasks: [{ 
+        id: string, 
+        titleTask: string, 
+        infoTask: string, 
+        finishedTask: boolean 
+      }] 
+    }]
   }];
 }
 

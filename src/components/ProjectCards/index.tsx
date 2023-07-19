@@ -4,10 +4,14 @@ import OptionsProject from './OptionsProject';
 import AdicionarNovoCard from './AdicionarNovoCard';
 import { useContext } from 'react';
 import { UserContext } from '@/providers/UserProvider';
+import { ParticipateProjectsContext } from '@/providers/ParticipateProjectsProvider';
+import { useQuery } from '@apollo/client';
+import { GET_USER_BY_ID } from '@/graphql/user/GetUserById';
 
 interface ProjectCardsProps {
     color: string,
     projectId: string,
+    participate: boolean,
     participantes:  [{
         id: string,
         username: string, 
@@ -17,11 +21,17 @@ interface ProjectCardsProps {
     }]
 }
 
-export default function ProjectCards({ color, projectId, participantes }: ProjectCardsProps) {
+export default function ProjectCards({ color, participate, projectId, participantes }: ProjectCardsProps) {
+    const { projects } = useContext(ParticipateProjectsContext);
     const { user } = useContext(UserContext);
-    const project = user?.projects?.find(project => project.id === projectId)
+    const project = participate ? projects?.find(project => project.id === projectId) : user?.projects?.find(project => project.id === projectId);
     const cards = project?.cardTasks.length
     const allCards: number[] = []
+    const { loading, error, data } = useQuery(GET_USER_BY_ID, {
+        variables: {
+            userId: project?.userId
+        }
+    })
 
     if (cards) {
         for (let i = 1; i < cards + 1; i++) {
@@ -32,7 +42,7 @@ export default function ProjectCards({ color, projectId, participantes }: Projec
     return (
         <div className={styles.background} style={{ background: color }}>
             <div className={styles.project} >
-                {project && <OptionsProject titleProject={project.titleProject} participantes={participantes} projectId={project.id}/>}
+                {project && data && <OptionsProject userId={project.userId} username={data.getUserById} titleProject={project.titleProject} participantes={participantes} projectId={project.id}/>}
                 <div className={styles.projectCards}>
                     {project?.cardTasks?.map((card, index) => {
                         return (

@@ -13,7 +13,7 @@ export default function FavProjects() {
 
     return (
         <>
-            {favProjects && favProjects.length > 0 && <AllProjects projectsList={favProjects} title={"Favorite projects"} icon={IconFav} />}
+            {favProjects && favProjects.length > 0 && <AllProjects participate={""} projectsList={favProjects} title={"Favorite projects"} icon={IconFav} />}
         </>
     )
 }

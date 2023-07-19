@@ -5,9 +5,9 @@ export const GET_PARTICIPATE_PROJECTS = gql`
         getParticipateProjects(userId: $userId) {
             id
             titleProject
-            dataAcesso
-            dataAcesso
             participantes
+            userId
+            dataAcesso
             colorProject
             finishedProject
             cardTasks {

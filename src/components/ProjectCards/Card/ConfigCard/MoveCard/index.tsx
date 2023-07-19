@@ -1,6 +1,6 @@
 import { BsArrowLeftShort } from 'react-icons/bs';
 import styles from './MoveCard.module.scss';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { MdClose } from 'react-icons/md';
 import { useMutation } from '@apollo/client';
 import { MOVE_CARD } from '@/graphql/card/MoveCard';
@@ -28,25 +28,25 @@ export default function MoveCard({ userId, position, projectId, cardId, onClick,
         setValue((prev) => ({ ...prev, select: !prev.select }));
     }
 
-    function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-        const selectedNumber = parseInt(event.target.value, 10);
-        setValue({ number: selectedNumber, select: false });
-    }
-
-    function handleSubmit() {
-        const newPosition = value.number > 1 ? value.number - 2 : value.number
+    function handleSubmit(value: number) {
         moverCard({
             variables: {
                 userId,
                 projectId,
                 cardId,
-                position: newPosition
+                position: value - 1
             }
         })
         .then(() => {
             updateUserInfo()
             close()
         })
+    }
+
+    function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
+        const selectedNumber = parseInt(event.target.value, 10);
+        setValue({ number: selectedNumber, select: false });
+        handleSubmit(selectedNumber);
     }
 
     return (
@@ -60,7 +60,7 @@ export default function MoveCard({ userId, position, projectId, cardId, onClick,
                 <span className={styles.text}>{value.number}</span>
             </div>
             {value.select && (
-                <select className={styles.select} value={value.number.toString()} onChange={(event) => {handleSelectChange(event), handleSubmit()}}>
+                <select className={styles.select} value={value.number.toString()} onChange={handleSelectChange}>
                     {optionValue.map((option, index) => {
                         return (
                             <option key={index} value={option}>{option}</option>

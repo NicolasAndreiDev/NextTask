@@ -24,10 +24,10 @@ export default function OptionsHeader({ onClick }: { onClick: () => void }) {
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
-            if (PopUpRef.current && !PopUpRef.current.favProjects?.contains(event.target as Element)) {
+            if (PopUpRef.current && PopUpRef.current.favProjects && !PopUpRef.current.favProjects.contains(event.target as Element)) {
                 setProjects({ projectsFav: false })
             };
-            if (PopUpRef.current && !PopUpRef.current.recentProjects?.contains(event.target as Element)) {
+            if (PopUpRef.current && PopUpRef.current.recentProjects && !PopUpRef.current.recentProjects.contains(event.target as Element)) {
                 setProjects({ projectsRecents: false })
             };
         };

@@ -1,23 +1,16 @@
 import { useContext } from "react";
 import AllProjects from "../AllProjects";
 import { FiUsers } from 'react-icons/fi';
-import { UserContext } from "@/providers/UserProvider";
-import { useQuery } from "@apollo/client";
-import { GET_PARTICIPATE_PROJECTS } from "@/graphql/projects/GetParticipateProjects";
+import { ParticipateProjectsContext } from "@/providers/ParticipateProjectsProvider";
 
 export default function ParticipateProjects() {
-    const { user } = useContext(UserContext);
-    const { loading: loadingData, error: errorData, data: userData } = useQuery(GET_PARTICIPATE_PROJECTS, {
-      variables: {
-        userId: user?.id,
-      },
-    });
+    const { projects } = useContext(ParticipateProjectsContext);
     const Icon = <FiUsers />;
   
     return (
       <>
-        {userData?.getParticipateProjects?.length > 0 && (
-          <AllProjects projectsList={userData.getParticipateProjects} title={"Participate Projects"} icon={Icon} />
+        {projects && projects?.length > 0 && (
+          <AllProjects participate={'participate/'} projectsList={projects} title={"Participate Projects"} icon={Icon} />
         )}
       </>
     );

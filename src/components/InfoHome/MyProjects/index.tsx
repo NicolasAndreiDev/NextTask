@@ -8,7 +8,7 @@ export default function MyProjects() {
     const projects = user?.projects?.filter((project) => project.finishedProject !== true)
 
     return (
-        <AllProjects projectsList={projects} title={"My Projects"}>
+        <AllProjects participate={""} projectsList={projects} title={"My Projects"}>
             <CreateProject />
         </AllProjects>
     )

@@ -3,6 +3,9 @@ import { MdClose } from "react-icons/md";
 import styles from './InviteUserPopUp.module.scss';
 import { IoIosArrowDown } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
+import { useMutation } from "@apollo/client";
+import { SEND_EMAIL } from "@/graphql/projects/SendEmail";
+import { useState } from "react";
 
 type UsersProps = [{
     id: string,
@@ -12,7 +15,35 @@ type UsersProps = [{
     perfilColor: string
 }]
 
-export default function InviteUserPopUp({ onClick, users }: { onClick: () => void, users:  UsersProps}) {
+export default function InviteUserPopUp({ onClick, users, userId, projectId, projectName, username }: { 
+    onClick: () => void, 
+    users: UsersProps, 
+    userId: string,
+    projectId: string,
+    projectName: string,
+    username: string, 
+}) {
+    const [sendConvite, { loading, error }] = useMutation(SEND_EMAIL);
+    const [value, setValue] = useState("");
+
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setValue(event.target.value);
+    }
+
+    function handleSubmit() {
+        sendConvite({
+            variables: {
+                user: {
+                    userId,
+                    projectId,
+                    projectName,
+                    username,
+                    email: value,
+                }
+            }
+        })
+    }
+
     return (
         <PopUp largura={"44rem"}>
             <div className={styles.top}>
@@ -20,7 +51,7 @@ export default function InviteUserPopUp({ onClick, users }: { onClick: () => voi
                 <MdClose className={styles.icon} onClick={onClick} />
             </div>
             <div className={styles.inviteEmail}>
-                <input placeholder={"Email address"} className={styles.inputEmail} />
+                <input placeholder={"Email address"} value={value} onChange={handleChange} className={styles.inputEmail} />
                 <button className={styles.typeUser}>
                     <span>Member</span>
                     <IoIosArrowDown />
@@ -28,28 +59,26 @@ export default function InviteUserPopUp({ onClick, users }: { onClick: () => voi
                 <button className={styles.compartilhar}>To share</button>
             </div>
             <div className={styles.allUsers}>
-            {users.map((user) => {
-                return (
-                    <div className={styles.userInfo} key={user.id}>
-                        <div className={styles.dados}>
-                            <div className={styles.user} style={{backgroundColor: user.perfilColor}}>
-                                <FaUser className={styles.icon} />
+                {users.map((user) => {
+                    return (
+                        <div className={styles.userInfo} key={user.id}>
+                            <div className={styles.dados}>
+                                <div className={styles.user} style={{ backgroundColor: user.perfilColor }}>
+                                    <FaUser className={styles.icon} />
+                                </div>
+                                <div className={styles.info}>
+                                    <span className={styles.username}>{user.username}</span>
+                                    <span className={styles.email}>{user.email}</span>
+                                </div>
                             </div>
-                            <div className={styles.info}>
-                                <span className={styles.username}>{user.username}</span>
-                                <span className={styles.email}>{user.email}</span>
-                            </div>
+                            <button className={styles.userType}>
+                                <span>Admin</span>
+                                <IoIosArrowDown />
+                            </button>
                         </div>
-                        <button className={styles.userType}>
-                            <span>Admin</span>
-                            <IoIosArrowDown />
-                        </button>
-                    </div>
-                )
-            })}
+                    )
+                })}
             </div>
         </PopUp>
     )
 }
-
-//· criador do projeto

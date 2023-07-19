@@ -1,6 +1,6 @@
 @import '@/styles/variaveis.scss';
 
-.projects{
+.projects {
     position: absolute;
     top: 110%;
     height: min-content;
@@ -10,33 +10,51 @@
     width: 28rem;
     box-shadow: $shadow;
     background-color: $cor-principal;
-    .project{
+
+    .project {
         display: flex;
         align-items: center;
-        padding: 1rem 2rem ;
+        padding: 1rem 2rem;
         cursor: pointer;
-        &:hover{
+        position: relative;
+
+        &:hover {
             background-color: $cinza-claro;
         }
-        .fundoProject{
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+
+        }
+
+        .fundoProject {
             width: 4.4rem;
+            z-index: 1;
             height: 3.6rem;
             border-radius: .4rem;
         }
-        .projectInfo{
+
+        .projectInfo {
             display: flex;
+            z-index: 1;
             flex-direction: column;
             margin-left: 1rem;
-            .title{
+
+            .title {
                 font-size: $tamanho-do-texto;
                 font-weight: bold;
                 text-transform: uppercase;
             }
-            .info{
+
+            .info {
                 font-size: 1.4rem;
             }
         }
-        .star{
+
+        .star {
             height: 1.6rem;
             width: 1.6rem;
             position: absolute;
@@ -46,7 +64,8 @@
             cursor: pointer;
         }
     }
-    .text{
+
+    .text {
         font-size: 1.6rem;
         text-align: center;
         padding: 2rem 0rem;

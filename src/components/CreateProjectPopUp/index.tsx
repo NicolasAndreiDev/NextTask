@@ -34,7 +34,7 @@ export default function CreateProjectPopUp({ onClick }: { onClick: () => void })
                     dataAcesso: new Date(),
                     finishedProject: false,
                     participantes: [
-                        user?.id,
+                        user?.email,
                     ]
                 }
             }

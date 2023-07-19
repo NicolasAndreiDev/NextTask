@@ -11,12 +11,6 @@ interface ProjectProps {
     }
 }
 
-export async function generateMetadata({ params }: ProjectProps) {
-    return {
-        title: `${params.id}`
-    }
-}
-
 export default function Project({ params }: ProjectProps) {
     const { user } = useContext(UserContext);
     const project = user?.projects?.find((project) => project.id === params.id);
@@ -28,7 +22,7 @@ export default function Project({ params }: ProjectProps) {
 
     return (
         <>
-            {project && userData && <ProjectCards participantes={userData.getUsersById} color={project.colorProject} projectId={project.id} />}
+            {project && userData && <ProjectCards participate={false} participantes={userData.getUsersByEmail} color={project.colorProject} projectId={project.id} />}
         </>
     )
 }

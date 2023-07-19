@@ -25,6 +25,8 @@ interface OptionsProps {
 interface OptionsProjectProps {
   titleProject: string,
   projectId: string,
+  username: string,
+  userId: string,
   participantes: [{
     id: string,
     username: string, 
@@ -34,7 +36,7 @@ interface OptionsProjectProps {
   }]
 }
 
-export default function OptionsProject({ titleProject, projectId, participantes }: OptionsProjectProps) {
+export default function OptionsProject({ titleProject, projectId, username, userId, participantes }: OptionsProjectProps) {
   const [options, setOptions] = useState<OptionsProps>({
     layout: false,
     config: false,
@@ -112,7 +114,7 @@ export default function OptionsProject({ titleProject, projectId, participantes 
       </div>
       {options.invite && (
         <div ref={PopUpRef}>
-          <InviteUserPopUp users={participantes} onClick={() => handleClick('invite')} />
+          <InviteUserPopUp userId={userId} projectId={projectId} projectName={titleProject} username={username} users={participantes} onClick={() => handleClick('invite')} />
         </div>
       )}
       {options.invite && <Foco color={'rgba(0, 0, 0, 0.4)'} />}
