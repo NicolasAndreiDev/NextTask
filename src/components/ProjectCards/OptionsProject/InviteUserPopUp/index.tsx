@@ -4,8 +4,9 @@ import styles from './InviteUserPopUp.module.scss';
 import { IoIosArrowDown } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { useMutation } from "@apollo/client";
-import { SEND_EMAIL } from "@/graphql/projects/SendEmail";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { SEND_CONVITE } from "@/graphql/invitations/sendConvite";
+import { UserContext } from "@/providers/UserProvider";
 
 type UsersProps = [{
     id: string,
@@ -23,7 +24,8 @@ export default function InviteUserPopUp({ onClick, users, userId, projectId, pro
     projectName: string,
     username: string, 
 }) {
-    const [sendConvite, { loading, error }] = useMutation(SEND_EMAIL);
+    const { updateUserInfo } = useContext(UserContext);
+    const [sendConvite, { loading, error }] = useMutation(SEND_CONVITE);
     const [value, setValue] = useState("");
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -33,14 +35,15 @@ export default function InviteUserPopUp({ onClick, users, userId, projectId, pro
     function handleSubmit() {
         sendConvite({
             variables: {
-                user: {
+                convite: {
                     userId,
                     projectId,
-                    projectName,
-                    username,
                     email: value,
                 }
             }
+        }).then(() => {
+            updateUserInfo()
+            onClick()
         })
     }
 
@@ -56,7 +59,7 @@ export default function InviteUserPopUp({ onClick, users, userId, projectId, pro
                     <span>Member</span>
                     <IoIosArrowDown />
                 </button>
-                <button className={styles.compartilhar}>To share</button>
+                <button className={styles.compartilhar} onClick={handleSubmit}>To share</button>
             </div>
             <div className={styles.allUsers}>
                 {users.map((user) => {

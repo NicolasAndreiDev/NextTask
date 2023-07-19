@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image';
 import styles from './OptionsProject.module.scss';
 import { HiOutlineEllipsisHorizontal } from 'react-icons/hi2';
 import { HiOutlineTemplate } from 'react-icons/hi';
@@ -27,6 +26,7 @@ interface OptionsProjectProps {
   projectId: string,
   username: string,
   userId: string,
+  participantesNoAccount: string[],
   participantes: [{
     id: string,
     username: string, 
@@ -36,7 +36,7 @@ interface OptionsProjectProps {
   }]
 }
 
-export default function OptionsProject({ titleProject, projectId, username, userId, participantes }: OptionsProjectProps) {
+export default function OptionsProject({ titleProject, projectId, participantesNoAccount, username, userId, participantes }: OptionsProjectProps) {
   const [options, setOptions] = useState<OptionsProps>({
     layout: false,
     config: false,
@@ -47,6 +47,8 @@ export default function OptionsProject({ titleProject, projectId, username, user
   });
   const PopUpRef = useRef<HTMLDivElement>(null);
   const userList = participantes.slice(0, 4);
+  const allParticipantes = participantes.filter((participantes) => participantes.email);
+  console.log(participantesNoAccount)
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

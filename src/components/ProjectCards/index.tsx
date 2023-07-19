@@ -42,7 +42,7 @@ export default function ProjectCards({ color, participate, projectId, participan
     return (
         <div className={styles.background} style={{ background: color }}>
             <div className={styles.project} >
-                {project && data && <OptionsProject userId={project.userId} username={data.getUserById} titleProject={project.titleProject} participantes={participantes} projectId={project.id}/>}
+                {project && data && <OptionsProject participantesNoAccount={project.participantes} userId={project.userId} username={data.getUserById.username} titleProject={project.titleProject} participantes={participantes} projectId={project.id}/>}
                 <div className={styles.projectCards}>
                     {project?.cardTasks?.map((card, index) => {
                         return (
