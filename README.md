@@ -9,5 +9,5 @@ Tecnologias e ferramentas utilizadas:
 - Graphql
 - NextAuth
 
-https://github.com/NicolasAndreiDev/NextTask/assets/124311026/004f2757-d73c-4dce-a246-c2c714f7c515
+https://github.com/NicolasAndreiDev/NextTask/assets/124311026/19459e28-32af-4633-9854-45ae447bc231
 
